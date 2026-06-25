@@ -666,10 +666,15 @@ function initGlobalAiAssistant() {
 
     const addLoading = () => addMessage('assistant', 'Thinking...');
 
+    // Click handlers
     openButton.addEventListener('click', () => setOpen(true));
     document.getElementById('globalAiFab')?.addEventListener('click', () => setOpen(true));
     closeButton?.addEventListener('click', () => setOpen(false));
     backdrop.addEventListener('click', () => setOpen(false));
+
+    // Hover handlers - open on mouseenter
+    openButton.addEventListener('mouseenter', () => setOpen(true));
+    document.getElementById('globalAiFab')?.addEventListener('mouseenter', () => setOpen(true));
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
