@@ -632,20 +632,35 @@ function initGlobalAiAssistant() {
     const input = document.getElementById('globalAiInput');
     const messages = document.getElementById('globalAiMessages');
 
+    // Debug logging
+    console.log('🤖 Initializing AI Assistant...');
+    console.log('  Drawer:', drawer ? '✅' : '❌');
+    console.log('  Backdrop:', backdrop ? '✅' : '❌');
+    console.log('  Open Button:', openButton ? '✅' : '❌');
+    console.log('  Close Button:', closeButton ? '✅' : '❌');
+    console.log('  Form:', form ? '✅' : '❌');
+    console.log('  Input:', input ? '✅' : '❌');
+    console.log('  Messages:', messages ? '✅' : '❌');
+
     if (!drawer || !backdrop || !openButton || !form || !input || !messages) {
+        console.error('❌ AI Assistant initialization failed: Missing elements');
         return;
     }
+
+    console.log('✅ All elements found!');
 
     const sendUrl = drawer.dataset.sendUrl;
     let history = [];
 
     const setOpen = (open) => {
+        console.log('🔄 Setting AI drawer to:', open ? 'OPEN' : 'CLOSED');
         drawer.classList.toggle('open', open);
         drawer.setAttribute('aria-hidden', String(!open));
         openButton.setAttribute('aria-expanded', String(open));
         backdrop.hidden = !open;
 
         if (open) {
+            console.log('✅ Drawer opened, focusing input');
             window.setTimeout(() => input.focus(), 120);
         }
     };
@@ -667,14 +682,39 @@ function initGlobalAiAssistant() {
     const addLoading = () => addMessage('assistant', 'Thinking...');
 
     // Click handlers
-    openButton.addEventListener('click', () => setOpen(true));
-    document.getElementById('globalAiFab')?.addEventListener('click', () => setOpen(true));
-    closeButton?.addEventListener('click', () => setOpen(false));
-    backdrop.addEventListener('click', () => setOpen(false));
+    openButton.addEventListener('click', () => {
+        console.log('📍 Navbar icon clicked!');
+        setOpen(true);
+    });
+
+    const fab = document.getElementById('globalAiFab');
+    fab?.addEventListener('click', () => {
+        console.log('📍 FAB button clicked!');
+        setOpen(true);
+    });
+
+    closeButton?.addEventListener('click', () => {
+        console.log('📍 Close button clicked!');
+        setOpen(false);
+    });
+
+    backdrop.addEventListener('click', () => {
+        console.log('📍 Backdrop clicked!');
+        setOpen(false);
+    });
 
     // Hover handlers - open on mouseenter
-    openButton.addEventListener('mouseenter', () => setOpen(true));
-    document.getElementById('globalAiFab')?.addEventListener('mouseenter', () => setOpen(true));
+    openButton.addEventListener('mouseenter', () => {
+        console.log('🖱️ Navbar icon hovered!');
+        setOpen(true);
+    });
+
+    fab?.addEventListener('mouseenter', () => {
+        console.log('🖱️ FAB button hovered!');
+        setOpen(true);
+    });
+
+    console.log('✅ AI Assistant event listeners attached!');
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
