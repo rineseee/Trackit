@@ -1965,12 +1965,13 @@
     .ui-button.primary {
         background: var(--trackit-primary);
         border-color: var(--trackit-primary);
-        color: white;
+        color: #000000;
     }
 
     .ui-button.primary:hover {
         background: var(--trackit-primary-hover);
         border-color: var(--trackit-primary-hover);
+        color: #000000;
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
     }
@@ -1978,13 +1979,13 @@
     .ui-button.secondary {
         background: #f3f4f6;
         border-color: #d1d5db;
-        color: var(--trackit-text);
+        color: #000000;
     }
 
     .ui-button.secondary:hover {
         background: #dbeafe;
         border-color: #bfdbfe;
-        color: var(--trackit-primary);
+        color: #000000;
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(59, 130, 246, 0.1);
     }
