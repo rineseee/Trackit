@@ -48,7 +48,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <button class="trackit-fab" id="globalAiFab" aria-label="Open AI Assistant" title="AI Assistant">
-        <i class="bi bi-stars"></i>
+        <i class="bi bi-chat-left-dots"></i>
     </button>
 
     @stack('scripts')

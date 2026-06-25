@@ -9,7 +9,7 @@
     <div class="trackit-topbar-right">
         <button type="button" class="trackit-icon-button" id="globalAiToggle" title="AI Assistant"
             aria-label="Open AI Assistant">
-            <i class="bi bi-stars"></i>
+            <i class="bi bi-chat-left-dots"></i>
         </button>
 
         <button type="button" class="trackit-icon-button" id="darkModeToggle" title="Toggle dark mode"
