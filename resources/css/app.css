@@ -1589,33 +1589,33 @@
 
     .dashboard-hero {
         margin: 0 32px 40px;
-        background: linear-gradient(135deg, var(--trackit-primary) 0%, var(--trackit-primary-hover) 100%);
-        border: none;
+        background: linear-gradient(135deg, #f0f4f8 0%, #f5f9fc 100%);
+        border: 1px solid #e2e8f0;
         border-radius: 16px;
         padding: 48px 40px;
-        color: white;
+        color: var(--trackit-text);
         transition: all 200ms ease;
         animation: slideUp 300ms ease;
-        box-shadow: 0 20px 50px rgba(79, 70, 229, 0.15);
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
     }
 
     .dashboard-hero:hover {
-        box-shadow: 0 24px 60px rgba(79, 70, 229, 0.25);
-        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+        border-color: #cbd5e1;
     }
 
     .dashboard-hero h2 {
         margin: 0 0 12px;
         font-size: 32px;
         font-weight: 700;
-        color: white;
+        color: var(--trackit-text);
         letter-spacing: -0.01em;
     }
 
     .dashboard-hero p {
         margin: 0 0 32px;
         font-size: 16px;
-        color: rgba(255, 255, 255, 0.9);
+        color: var(--trackit-muted);
         line-height: 1.6;
         max-width: 600px;
     }
@@ -1628,25 +1628,27 @@
     }
 
     .dashboard-actions .btn {
-        background: rgba(255, 255, 255, 0.2);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        color: white;
+        background: transparent;
+        border: 1px solid #cbd5e1;
+        color: var(--trackit-text);
     }
 
     .dashboard-actions .btn:hover {
-        background: rgba(255, 255, 255, 0.3);
-        border-color: rgba(255, 255, 255, 0.5);
+        background: #ffffff;
+        border-color: var(--trackit-primary);
+        color: var(--trackit-primary);
     }
 
     .dashboard-actions .btn-primary {
-        background: white;
-        color: var(--trackit-primary);
-        border-color: white;
+        background: var(--trackit-primary);
+        color: white;
+        border-color: var(--trackit-primary);
     }
 
     .dashboard-actions .btn-primary:hover {
-        background: rgba(255, 255, 255, 0.95);
-        color: var(--trackit-primary-hover);
+        background: var(--trackit-primary-hover);
+        color: white;
+        border-color: var(--trackit-primary-hover);
     }
 
     .dashboard-hero-stats {
