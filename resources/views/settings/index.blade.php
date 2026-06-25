@@ -34,45 +34,45 @@
 
         <div class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
             <section class="space-y-6">
-                <div style="border-radius: 12px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                    <div style="margin-bottom: 20px;">
-                        <h2 style="font-size: 20px; font-weight: 700; color: var(--trackit-text); margin: 0 0 8px;">Profile</h2>
-                        <p style="font-size: 14px; color: var(--trackit-muted); margin: 0;">Keep your main account information up to date.</p>
+                <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 14px;">
+                        <h2 style="font-size: 16px; font-weight: 700; color: var(--trackit-text); margin: 0 0 4px;">Profile</h2>
+                        <p style="font-size: 12px; color: var(--trackit-muted); margin: 0;">Keep your information up to date.</p>
                     </div>
 
-                    <form action="{{ route('settings.updateProfile') }}" method="POST" class="grid gap-4 sm:grid-cols-2">
+                    <form action="{{ route('settings.updateProfile') }}" method="POST" class="grid gap-3 sm:grid-cols-2">
                         @csrf
                         @method('PUT')
 
                         <label class="block sm:col-span-1">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Full name</span>
-                            <input type="text" name="name" value="{{ $user->name }}" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
+                            <span style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Full name</span>
+                            <input type="text" name="name" value="{{ $user->name }}" required style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Email address</span>
-                            <input type="email" name="email" value="{{ $user->email }}" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
+                            <span style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Email</span>
+                            <input type="email" name="email" value="{{ $user->email }}" required style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Phone</span>
-                            <input type="tel" name="phone" value="{{ $user->phone ?? '' }}" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
+                            <span style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Phone</span>
+                            <input type="tel" name="phone" value="{{ $user->phone ?? '' }}" style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Company</span>
-                            <input type="text" name="company" value="{{ $user->company ?? '' }}" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
+                            <span style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Company</span>
+                            <input type="text" name="company" value="{{ $user->company ?? '' }}" style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-2">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Bio</span>
-                            <textarea name="bio" rows="4" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease; font-family: inherit;">{{ $user->bio ?? '' }}</textarea>
+                            <span style="display: block; margin-bottom: 6px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Bio</span>
+                            <textarea name="bio" rows="3" style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease; font-family: inherit;">{{ $user->bio ?? '' }}</textarea>
                         </label>
 
                         <div class="sm:col-span-2">
-                            <button type="submit" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; background: var(--trackit-primary); color: white; padding: 10px 16px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
-                                <i class="bi bi-check2"></i>
-                                Save profile
+                            <button type="submit" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
+                                <i class="bi bi-check2" style="font-size: 13px;"></i>
+                                Save
                             </button>
                         </div>
                     </form>
