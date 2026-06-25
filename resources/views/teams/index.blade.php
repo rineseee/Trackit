@@ -3,7 +3,7 @@
 @section('title', 'Team Management')
 
 @section('content')
-    <div class="mx-auto max-w-5xl space-y-3">
+    <div class="mx-auto max-w-7xl space-y-3">
         <section style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
             <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
                 <div>
