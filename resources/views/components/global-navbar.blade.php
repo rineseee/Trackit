@@ -17,6 +17,15 @@
             <i class="bi bi-moon-stars"></i>
         </button>
 
+        @auth
+            <form method="POST" action="{{ route('logout') }}" style="display: inline; margin: 0;">
+                @csrf
+                <button type="submit" class="trackit-icon-button" title="Logout" aria-label="Logout" style="color: #ef4444;">
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
+            </form>
+        @endauth
+
         <div class="trackit-profile-menu">
             <button type="button" class="trackit-avatar" id="profileToggle" aria-label="Open user menu"
                 aria-expanded="false" aria-controls="profileDropdown">
@@ -33,14 +42,6 @@
                     <i class="bi bi-gear"></i>
                     Settings
                 </a>
-
-                <form method="POST" action="{{ route('logout') }}" style="width: 100%;">
-                    @csrf
-                    <button type="submit" class="trackit-profile-item text-danger" style="width: 100%; text-align: left;">
-                        <i class="bi bi-box-arrow-right"></i>
-                        Logout
-                    </button>
-                </form>
             </div>
         </div>
     </div>
