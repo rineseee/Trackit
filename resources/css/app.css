@@ -3684,3 +3684,100 @@ html[data-theme='dark'] .metric-strip span {
 html[data-theme='dark'] .metric-strip strong {
     color: var(--trackit-text);
 }
+
+/* ============================================================================
+   STAT CARD DARK MODE SUPPORT
+   ============================================================================ */
+
+html[data-theme='dark'] .stat-card {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .stat-label {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .stat-value {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .stat-change {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .page-header {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .page-header h1 {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .page-header p {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .card-body {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .card-header {
+    background: var(--trackit-surface-soft);
+    border-color: var(--trackit-border);
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .card-title {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .table {
+    color: var(--trackit-text);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .table thead {
+    background: var(--trackit-surface-soft);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .table thead th {
+    color: var(--trackit-text);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .table tbody td {
+    border-color: var(--trackit-border);
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .table tbody tr:hover {
+    background: var(--trackit-surface-soft);
+}
+
+html[data-theme='dark'] .badge {
+    background: var(--trackit-primary);
+    color: white;
+}
+
+html[data-theme='dark'] .status-badge {
+    color: white;
+}
+
+html[data-theme='dark'] .priority-badge {
+    color: white;
+}
+
+html[data-theme='dark'] .text-decoration-none {
+    color: var(--trackit-primary);
+}
+
+html[data-theme='dark'] a {
+    color: var(--trackit-primary);
+}
+
+html[data-theme='dark'] a:hover {
+    color: var(--trackit-primary-hover);
+}
