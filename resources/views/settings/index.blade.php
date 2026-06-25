@@ -140,65 +140,65 @@
                     </form>
                 </div>
 
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div class="mb-5">
-                        <h2 class="text-2xl font-bold tracking-tight text-slate-900">Notifications</h2>
-                        <p class="mt-1 text-sm text-slate-600">Keep only the updates you want.</p>
+                <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 10px;">
+                        <h2 style="font-size: 15px; font-weight: 700; color: var(--trackit-text); margin: 0 0 4px;">Notifications</h2>
+                        <p style="font-size: 12px; color: var(--trackit-muted); margin: 0;">Choose what to receive.</p>
                     </div>
 
-                    <form action="{{ route('settings.updateNotifications') }}" method="POST" class="space-y-4">
+                    <form action="{{ route('settings.updateNotifications') }}" method="POST" style="display: flex; flex-direction: column; gap: 6px;">
                         @csrf
                         @method('PUT')
 
-                        <label class="flex items-center gap-3 rounded-2xl border border-slate-200 p-4">
-                            <input type="checkbox" name="notifications_email" class="h-5 w-5 rounded border-slate-300 text-sky-600" {{ $notifications_email ? 'checked' : '' }}>
-                            <span>
-                                <span class="block font-semibold text-slate-900">Email</span>
-                                <span class="block text-sm text-slate-500">Receive notifications via email</span>
+                        <label style="display: flex; align-items: center; gap: 8px; border-radius: 6px; border: 1px solid var(--trackit-border); padding: 8px 10px; cursor: pointer; transition: all 150ms ease; background: var(--trackit-surface-soft);">
+                            <input type="checkbox" name="notifications_email" style="width: 16px; height: 16px; cursor: pointer; accent-color: #000000;" {{ $notifications_email ? 'checked' : '' }}>
+                            <span style="flex: 1;">
+                                <span style="display: block; font-weight: 600; color: var(--trackit-text); font-size: 12px;">Email</span>
+                                <span style="display: block; font-size: 11px; color: var(--trackit-muted);">Via email</span>
                             </span>
                         </label>
 
-                        <label class="flex items-center gap-3 rounded-2xl border border-slate-200 p-4">
-                            <input type="checkbox" name="notifications_push" class="h-5 w-5 rounded border-slate-300 text-sky-600" {{ $notifications_push ? 'checked' : '' }}>
-                            <span>
-                                <span class="block font-semibold text-slate-900">Push</span>
-                                <span class="block text-sm text-slate-500">Browser notifications</span>
+                        <label style="display: flex; align-items: center; gap: 8px; border-radius: 6px; border: 1px solid var(--trackit-border); padding: 8px 10px; cursor: pointer; transition: all 150ms ease; background: var(--trackit-surface-soft);">
+                            <input type="checkbox" name="notifications_push" style="width: 16px; height: 16px; cursor: pointer; accent-color: #000000;" {{ $notifications_push ? 'checked' : '' }}>
+                            <span style="flex: 1;">
+                                <span style="display: block; font-weight: 600; color: var(--trackit-text); font-size: 12px;">Push</span>
+                                <span style="display: block; font-size: 11px; color: var(--trackit-muted);">Browser</span>
                             </span>
                         </label>
 
-                        <label class="flex items-center gap-3 rounded-2xl border border-slate-200 p-4">
-                            <input type="checkbox" name="notifications_sms" class="h-5 w-5 rounded border-slate-300 text-sky-600" {{ $notifications_sms ? 'checked' : '' }}>
-                            <span>
-                                <span class="block font-semibold text-slate-900">SMS</span>
-                                <span class="block text-sm text-slate-500">Text message alerts</span>
+                        <label style="display: flex; align-items: center; gap: 8px; border-radius: 6px; border: 1px solid var(--trackit-border); padding: 8px 10px; cursor: pointer; transition: all 150ms ease; background: var(--trackit-surface-soft);">
+                            <input type="checkbox" name="notifications_sms" style="width: 16px; height: 16px; cursor: pointer; accent-color: #000000;" {{ $notifications_sms ? 'checked' : '' }}>
+                            <span style="flex: 1;">
+                                <span style="display: block; font-weight: 600; color: var(--trackit-text); font-size: 12px;">SMS</span>
+                                <span style="display: block; font-size: 11px; color: var(--trackit-muted);">Text alerts</span>
                             </span>
                         </label>
 
-                        <button type="submit" class="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
-                            <i class="bi bi-check2-circle"></i>
-                            Save notifications
+                        <button type="submit" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease; align-self: flex-start;">
+                            <i class="bi bi-check2" style="font-size: 13px;"></i>
+                            Save
                         </button>
                     </form>
                 </div>
 
-                <div class="rounded-3xl border border-red-200 bg-red-50 p-6 shadow-sm">
-                    <div class="mb-4">
-                        <h2 class="text-2xl font-bold tracking-tight text-red-700">Danger zone</h2>
-                        <p class="mt-1 text-sm text-red-700/80">This action removes your account permanently.</p>
+                <div style="border-radius: 10px; border: 1px solid #fca5a5; background: #fef2f2; padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 8px;">
+                        <h2 style="font-size: 15px; font-weight: 700; color: #991b1b; margin: 0 0 2px;">Danger</h2>
+                        <p style="font-size: 12px; color: #b91c1c; margin: 0;">Permanently delete account.</p>
                     </div>
 
-                    <form action="{{ route('settings.deleteAccount') }}" method="POST" onsubmit="return confirm('Are you sure? This will permanently delete your account and all data!');" class="space-y-4">
+                    <form action="{{ route('settings.deleteAccount') }}" method="POST" onsubmit="return confirm('Are you sure? This will permanently delete your account!');" style="display: flex; flex-direction: column; gap: 6px;">
                         @csrf
                         @method('DELETE')
 
-                        <label class="block">
-                            <span class="mb-2 block text-sm font-semibold text-red-700">Confirm password</span>
-                            <input type="password" name="password" placeholder="Enter your password" required class="w-full rounded-xl border border-red-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-red-400 focus:ring-4 focus:ring-red-100">
+                        <label style="display: block;">
+                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: #991b1b;">Confirm password</span>
+                            <input type="password" name="password" placeholder="Enter password" required style="width: 100%; border-radius: 6px; border: 1px solid #fca5a5; background: #fef2f2; color: #991b1b; padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
-                        <button type="submit" class="inline-flex items-center gap-2 rounded-2xl bg-red-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-red-700">
-                            <i class="bi bi-trash"></i>
-                            Delete account
+                        <button type="submit" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: #dc2626; color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease; align-self: flex-start;">
+                            <i class="bi bi-trash" style="font-size: 13px;"></i>
+                            Delete
                         </button>
                     </form>
                 </div>
