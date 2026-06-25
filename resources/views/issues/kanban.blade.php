@@ -61,19 +61,20 @@
 
     <style>
         .kanban-page {
-            --kanban-card-radius: 1.1rem;
-            --kanban-column-radius: 1.35rem;
+            --kanban-card-radius: 0.8rem;
+            --kanban-column-radius: 1rem;
             --kanban-surface: rgba(255, 255, 255, 0.92);
         }
 
         .kanban-hero {
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            border-radius: 1.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 1rem;
             background:
                 linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.06);
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+            padding: 2rem;
         }
 
         .kanban-hero::after {
@@ -81,19 +82,20 @@
         }
 
         .kanban-stat {
-            border: 1px solid rgba(148, 163, 184, 0.16);
-            border-radius: 1.1rem;
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 0.8rem;
             background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+            padding: 1rem;
         }
 
         .kanban-column {
             position: relative;
             border-radius: var(--kanban-column-radius);
-            border: 1px solid rgba(148, 163, 184, 0.18);
+            border: 1px solid rgba(148, 163, 184, 0.12);
             background: var(--kanban-surface);
-            box-shadow: 0 18px 36px rgba(15, 23, 42, 0.05);
-            min-height: 72vh;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.03);
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
         }
@@ -104,44 +106,44 @@
             content: "";
             position: absolute;
             inset: 0 0 auto 0;
-            height: 6px;
+            height: 3px;
             border-radius: var(--kanban-column-radius) var(--kanban-column-radius) 0 0;
         }
 
         .kanban-column.open::before {
-            background: #dc2626;
+            background: #fca5a5;
         }
 
         .kanban-column.in_progress::before {
-            background: #ea580c;
+            background: #fed7aa;
         }
 
         .kanban-column.closed::before {
-            background: #059669;
+            background: #a7f3d0;
         }
 
         .kanban-column-header {
-            padding: 1.35rem 1.35rem 1rem;
+            padding: 1rem 1rem 0.75rem;
         }
 
         .kanban-dropzone {
             flex: 1;
-            min-height: 18rem;
-            padding: 0 1rem 1rem;
+            min-height: 15rem;
+            padding: 0 0.75rem 0.75rem;
         }
 
         .kanban-card {
-            border: 1px solid rgba(148, 163, 184, 0.16);
+            border: 1px solid rgba(148, 163, 184, 0.12);
             border-radius: var(--kanban-card-radius);
             background: #fff;
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.05);
-            transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+            transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
         }
 
         .kanban-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08);
-            border-color: rgba(59, 130, 246, 0.24);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+            border-color: rgba(148, 163, 184, 0.3);
         }
 
         .kanban-card.is-updating {
