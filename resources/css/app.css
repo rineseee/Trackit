@@ -14,11 +14,11 @@
     :root {
         color-scheme: light;
 
-        /* PRIMARY ACCENT - SOFT MODERN BLUE */
-        --trackit-primary: #3b82f6;
-        --trackit-primary-soft: #dbeafe;
-        --trackit-primary-hover: #2563eb;
-        --trackit-primary-light: #eff6ff;
+        /* PRIMARY ACCENT - MODERN BLACK */
+        --trackit-primary: #000000;
+        --trackit-primary-soft: #f3f4f6;
+        --trackit-primary-hover: #1f2937;
+        --trackit-primary-light: #f9fafb;
 
         /* BACKGROUNDS & SURFACES */
         --trackit-bg: #fafbfc;
@@ -310,8 +310,8 @@
     }
 
     .trackit-icon-button:hover {
-        background: #dbeafe;
-        border-color: #bfdbfe;
+        background: #e5e7eb;
+        border-color: #9ca3af;
         color: var(--trackit-primary);
     }
 
@@ -1971,9 +1971,9 @@
     .ui-button.primary:hover {
         background: var(--trackit-primary-hover);
         border-color: var(--trackit-primary-hover);
-        color: #000000;
+        color: #ffffff;
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.2);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
 
     .ui-button.secondary {
@@ -1983,11 +1983,11 @@
     }
 
     .ui-button.secondary:hover {
-        background: #dbeafe;
-        border-color: #bfdbfe;
+        background: #e5e7eb;
+        border-color: #9ca3af;
         color: #000000;
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(59, 130, 246, 0.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     }
 
     .ui-button i {
