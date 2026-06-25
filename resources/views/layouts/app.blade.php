@@ -48,7 +48,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <button class="trackit-fab" id="globalAiFab" aria-label="Open AI Assistant" title="AI Assistant">
-        <i class="bi bi-chat-left-dots"></i>
+        <i class="bi bi-sparkles" style="font-size: 20px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></i>
     </button>
 
     @stack('scripts')
