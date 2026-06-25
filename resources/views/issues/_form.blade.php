@@ -27,7 +27,7 @@
                 <h2 class="mt-1 text-2xl font-bold tracking-tight text-slate-900">
                     {{ $isEdit ? 'Refine the work item' : 'Create a clear issue from the start' }}
                 </h2>
-                <p class="mt-2 max-w-2xl text-sm leading-7 text-slate-600">
+                <p class="mt-2 max-w-7xl text-sm leading-7 text-slate-600">
                     Keep the essentials easy to scan: project, title, status, priority, due date, and tags.
                 </p>
             </div>
