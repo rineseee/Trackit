@@ -3530,3 +3530,157 @@ html[data-theme='dark'] .kanban-stat-badge {
     background: var(--trackit-surface-soft);
     border-color: var(--trackit-border);
 }
+
+/* ============================================================================
+   COMPREHENSIVE DARK MODE COVERAGE - TEAMS, TAGS, TABLES
+   ============================================================================ */
+
+html[data-theme='dark'] .workbench-header {
+    background: var(--trackit-surface);
+    border-bottom-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .workbench-panel {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .panel-heading {
+    background: var(--trackit-surface-soft);
+    border-bottom-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .project-row {
+    border-bottom-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .team-member-item {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .team-member-item:hover {
+    background: var(--trackit-surface-soft);
+    border-color: var(--trackit-primary);
+}
+
+html[data-theme='dark'] .page-banner {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .page-banner-content h1 {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .page-banner-content p {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .meta-tile {
+    background: var(--trackit-surface-soft);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .meta-tile-label {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .meta-tile-value {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] input,
+html[data-theme='dark'] select,
+html[data-theme='dark'] textarea {
+    background: var(--trackit-surface);
+    color: var(--trackit-text);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] input:focus,
+html[data-theme='dark'] select:focus,
+html[data-theme='dark'] textarea:focus {
+    border-color: var(--trackit-primary);
+    background: var(--trackit-surface);
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] option {
+    background: var(--trackit-surface);
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .form-field {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .form-field label {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .ui-button.secondary:hover {
+    background: #374151;
+    border-color: #4b5563;
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] h1,
+html[data-theme='dark'] h2,
+html[data-theme='dark'] h3,
+html[data-theme='dark'] h4,
+html[data-theme='dark'] h5,
+html[data-theme='dark'] h6 {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] p {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] span {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .badge,
+html[data-theme='dark'] .list-item-badge {
+    background: var(--trackit-surface-soft);
+    color: var(--trackit-text);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] table {
+    background: var(--trackit-surface);
+    color: var(--trackit-text);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] table thead {
+    background: var(--trackit-surface-soft);
+    border-bottom-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] table tbody tr {
+    border-bottom-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] table tbody tr:hover {
+    background: var(--trackit-surface-soft);
+}
+
+html[data-theme='dark'] .metric-strip {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .metric-strip > div {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .metric-strip span {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .metric-strip strong {
+    color: var(--trackit-text);
+}
