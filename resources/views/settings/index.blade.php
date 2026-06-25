@@ -3,36 +3,18 @@
 @section('title', 'Settings')
 
 @section('content')
-    <div class="mx-auto max-w-6xl space-y-8">
-        <section class="page-banner animate-fade-in">
-            <div class="page-banner-content">
-                <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--trackit-primary-soft); color: var(--trackit-primary); border-radius: 999px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
-                    <i class="bi bi-gear"></i>
-                    Settings
-                </span>
-                <h1 style="margin: 0 0 12px; font-size: 32px; font-weight: 700; color: var(--trackit-text);">
-                    Account settings
-                </h1>
-                <p style="margin: 0; font-size: 16px; color: var(--trackit-muted); line-height: 1.6;">
-                    Update your profile, security settings, and preferences in one clean place.
-                </p>
-            </div>
-
-            <div class="page-banner-meta">
-                <div class="meta-tile">
-                    <div class="meta-tile-label">Theme</div>
-                    <div class="meta-tile-value">{{ ucfirst($user->preferences['theme'] ?? 'Light') }}</div>
-                    <div style="font-size: 12px; color: var(--trackit-muted); margin-top: 4px;">Mode</div>
-                </div>
-                <div class="meta-tile">
-                    <div class="meta-tile-label">Status</div>
-                    <div class="meta-tile-value">Active</div>
-                    <div style="font-size: 12px; color: var(--trackit-muted); margin-top: 4px;">Account</div>
+    <div class="mx-auto max-w-5xl space-y-3">
+        <section style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+                <div>
+                    <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Settings</p>
+                    <h1 style="margin: 4px 0 0; font-size: 18px; font-weight: 700; color: var(--trackit-text); letter-spacing: -0.01em;">Account settings</h1>
+                    <p style="margin: 4px 0 0; font-size: 12px; color: var(--trackit-muted); line-height: 1.5;">Update your profile, security, and preferences.</p>
                 </div>
             </div>
         </section>
 
-        <div class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 3px;" class="lg:grid-cols-[1fr_0.9fr]">
             <section class="space-y-6">
                 <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
                     <div style="margin-bottom: 14px;">
@@ -78,35 +60,35 @@
                     </form>
                 </div>
 
-                <div style="border-radius: 12px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                    <div style="margin-bottom: 20px;">
-                        <h2 style="font-size: 20px; font-weight: 700; color: var(--trackit-text); margin: 0 0 8px;">Password</h2>
-                        <p style="font-size: 14px; color: var(--trackit-muted); margin: 0;">Use a strong password to keep your account secure.</p>
+                <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 10px;">
+                        <h2 style="font-size: 15px; font-weight: 700; color: var(--trackit-text); margin: 0 0 4px;">Password</h2>
+                        <p style="font-size: 12px; color: var(--trackit-muted); margin: 0;">Keep your account secure.</p>
                     </div>
 
-                    <form action="{{ route('settings.updatePassword') }}" method="POST" class="grid gap-4 sm:grid-cols-2">
+                    <form action="{{ route('settings.updatePassword') }}" method="POST" class="grid gap-3 sm:grid-cols-2">
                         @csrf
                         @method('PUT')
 
                         <label class="block sm:col-span-2">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Current password</span>
-                            <input type="password" name="current_password" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
+                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Current password</span>
+                            <input type="password" name="current_password" required style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">New password</span>
-                            <input type="password" name="password" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
+                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">New password</span>
+                            <input type="password" name="password" required style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Confirm password</span>
-                            <input type="password" name="password_confirmation" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
+                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Confirm</span>
+                            <input type="password" name="password_confirmation" required style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <div class="sm:col-span-2">
-                            <button type="submit" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; background: var(--trackit-primary); color: white; padding: 10px 16px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
-                                <i class="bi bi-lock"></i>
-                                Update password
+                            <button type="submit" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
+                                <i class="bi bi-lock" style="font-size: 13px;"></i>
+                                Update
                             </button>
                         </div>
                     </form>
