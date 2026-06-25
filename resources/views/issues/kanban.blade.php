@@ -37,17 +37,17 @@
         $priorityMeta = [
             'high' => [
                 'label' => 'High',
-                'class' => 'text-bg-danger',
+                'class' => 'kanban-priority-high',
                 'icon' => 'bi-fire',
             ],
             'medium' => [
                 'label' => 'Medium',
-                'class' => 'text-bg-warning',
+                'class' => 'kanban-priority-medium',
                 'icon' => 'bi-lightning-charge',
             ],
             'low' => [
                 'label' => 'Low',
-                'class' => 'text-bg-secondary',
+                'class' => 'kanban-priority-low',
                 'icon' => 'bi-dash-circle',
             ],
         ];
@@ -109,15 +109,15 @@
         }
 
         .kanban-column.open::before {
-            background: var(--trackit-danger);
+            background: #dc2626;
         }
 
         .kanban-column.in_progress::before {
-            background: var(--trackit-warning);
+            background: #ea580c;
         }
 
         .kanban-column.closed::before {
-            background: var(--trackit-success);
+            background: #059669;
         }
 
         .kanban-column-header {
@@ -174,11 +174,11 @@
         }
 
         .kanban-title:hover {
-            color: #2563eb;
+            color: #000000;
         }
 
         .kanban-meta {
-            color: #64748b;
+            color: #94a3b8;
             font-size: 0.82rem;
         }
 
@@ -188,9 +188,9 @@
             gap: 0.4rem;
             padding: 0.38rem 0.6rem;
             border-radius: 999px;
-            background: #f8fafc;
-            color: #334155;
-            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: #f3f4f6;
+            color: #4b5563;
+            border: 1px solid #e5e7eb;
             font-size: 0.74rem;
             font-weight: 600;
             line-height: 1;
@@ -205,11 +205,11 @@
             justify-content: center;
             border: 2px solid #fff;
             margin-left: -0.45rem;
-            background: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+            background: linear-gradient(135deg, #374151, #4b5563);
             color: #fff;
             font-size: 0.72rem;
             font-weight: 700;
-            box-shadow: 0 6px 12px rgba(15, 23, 42, 0.12);
+            box-shadow: 0 4px 8px rgba(15, 23, 42, 0.08);
         }
 
         .kanban-avatar:first-child {
@@ -230,6 +230,42 @@
 
         .kanban-chosen {
             box-shadow: 0 16px 34px rgba(15, 23, 42, 0.12) !important;
+        }
+
+        .kanban-priority-high {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.5rem;
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .kanban-priority-medium {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.5rem;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .kanban-priority-low {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.7rem;
+            border-radius: 0.5rem;
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
 
         .toast-container .toast {
