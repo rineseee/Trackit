@@ -1,54 +1,54 @@
 <form
     method="POST"
     action="{{ route('tags.store') }}"
-    class="space-y-6 rounded-2xl border border-slate-200/80 bg-white p-5 shadow-sm shadow-slate-200/60 lg:p-6"
+    style="display: flex; flex-direction: column; gap: 12px; border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);"
 >
     @csrf
 
     @include('partials.form-errors')
 
-    <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-100">
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Tag setup</p>
-        <h2 class="mt-1 text-xl font-bold tracking-tight text-slate-900">Create a reusable label</h2>
-        <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-            Use short, readable labels to help people scan work faster across lists, cards, and dashboards.
+    <div style="border-radius: 8px; background: var(--trackit-surface-soft); padding: 12px; border: 1px solid var(--trackit-border);">
+        <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Tag setup</p>
+        <h2 style="font-size: 15px; font-weight: 700; color: var(--trackit-text); margin: 4px 0 0; letter-spacing: -0.01em;">Create a reusable label</h2>
+        <p style="font-size: 12px; color: var(--trackit-muted); margin: 4px 0 0; line-height: 1.5;">
+            Use short labels to organize work.
         </p>
     </div>
 
-    <div class="grid gap-5">
-        <label class="block">
-            <span class="mb-2 block text-sm font-semibold text-slate-700">Tag name</span>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+        <label style="display: block;">
+            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Tag name</span>
             <input
                 type="text"
                 name="name"
                 value="{{ old('name', $tag->name) }}"
-                class="w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+                style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;"
                 placeholder="backend"
             >
         </label>
 
-        <label class="block">
-            <span class="mb-2 block text-sm font-semibold text-slate-700">Color</span>
+        <label style="display: block;">
+            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Color</span>
             <input
                 type="text"
                 name="color"
                 value="{{ old('color', $tag->color) }}"
-                class="w-full rounded-xl border border-slate-300 bg-white px-3 py-3 text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+                style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;"
                 placeholder="#0ea5e9"
             >
-            <span class="mt-2 block text-xs leading-5 text-slate-500">
-                Hex colors work best, but a simple label is also accepted.
+            <span style="display: block; margin-top: 4px; font-size: 11px; color: var(--trackit-muted); line-height: 1.4;">
+                Hex color or label
             </span>
         </label>
     </div>
 
-    <div class="flex flex-wrap gap-3">
-        <button type="submit" class="inline-flex items-center gap-2 rounded-xl bg-sky-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-700">
-            <i class="bi bi-check2"></i>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px;">
+        <button type="submit" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
+            <i class="bi bi-check2" style="font-size: 13px;"></i>
             Create tag
         </button>
-        <a href="{{ route('tags.index') }}" class="inline-flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-200">
-            <i class="bi bi-x-lg"></i>
+        <a href="{{ route('tags.index') }}" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: var(--trackit-surface-soft); padding: 8px 14px; font-size: 12px; font-weight: 600; color: var(--trackit-text); text-decoration: none; transition: all 150ms ease; border: 1px solid var(--trackit-border);">
+            <i class="bi bi-x-lg" style="font-size: 13px;"></i>
             Cancel
         </a>
     </div>
