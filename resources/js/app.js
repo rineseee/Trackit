@@ -554,6 +554,15 @@ function initIssueIndex() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Test FAB button
+    const fab = document.getElementById('globalAiFab');
+    console.log('🔍 Testing FAB button...');
+    if (fab) {
+        console.log('✅ FAB found - visible and clickable');
+    } else {
+        console.error('❌ FAB not found in DOM');
+    }
+
     document.querySelectorAll('[data-issue-page]').forEach(initIssuePage);
     initIssueIndex();
     initTrackitShell();
@@ -667,9 +676,20 @@ function initGlobalAiAssistant() {
     const addLoading = () => addMessage('assistant', 'Thinking...');
 
     // Click handlers
-    fab.addEventListener('click', () => setOpen(true));
-    closeButton?.addEventListener('click', () => setOpen(false));
-    backdrop.addEventListener('click', () => setOpen(false));
+    fab.addEventListener('click', () => {
+        console.log('🎯 FAB clicked! Opening chatbot...');
+        setOpen(true);
+    });
+    closeButton?.addEventListener('click', () => {
+        console.log('✖️ Close button clicked');
+        setOpen(false);
+    });
+    backdrop.addEventListener('click', () => {
+        console.log('✖️ Backdrop clicked');
+        setOpen(false);
+    });
+
+    console.log('✅ AI Assistant initialized successfully');
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
