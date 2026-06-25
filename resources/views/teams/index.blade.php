@@ -3,136 +3,115 @@
 @section('title', 'Team Management')
 
 @section('content')
-    <div class="mx-auto max-w-6xl space-y-8">
-        <section class="page-banner animate-fade-in">
-            <div class="page-banner-content">
-                <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: var(--trackit-primary-soft); color: var(--trackit-primary); border-radius: 999px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px;">
-                    <i class="bi bi-people"></i>
-                    Team management
-                </span>
-                <h1 style="margin: 0 0 12px; font-size: 32px; font-weight: 700; color: var(--trackit-text);">
-                    Manage your team
-                </h1>
-                <p style="margin: 0; font-size: 16px; color: var(--trackit-muted); line-height: 1.6;">
-                    Invite members, manage roles, and keep your team organized and productive.
-                </p>
-            </div>
-
-            <div class="page-banner-meta">
-                <div class="meta-tile">
-                    <div class="meta-tile-label">Members</div>
-                    <div class="meta-tile-value">{{ $totalMembers }}</div>
-                    <div style="font-size: 12px; color: var(--trackit-muted); margin-top: 4px;">Total team</div>
+    <div class="mx-auto max-w-5xl space-y-3">
+        <section style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+                <div>
+                    <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Team Management</p>
+                    <h1 style="margin: 4px 0 0; font-size: 18px; font-weight: 700; color: var(--trackit-text); letter-spacing: -0.01em;">Manage your team</h1>
+                    <p style="margin: 4px 0 0; font-size: 12px; color: var(--trackit-muted); line-height: 1.5;">Invite members and manage roles.</p>
                 </div>
-                <div class="meta-tile">
-                    <div class="meta-tile-label">Pending</div>
-                    <div class="meta-tile-value">{{ count($pendingInvitations) }}</div>
-                    <div style="font-size: 12px; color: var(--trackit-muted); margin-top: 4px;">Invites</div>
-                </div>
-            </div>
 
-            <div class="page-banner-actions">
-                <a href="#invite-member" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
-                    <i class="bi bi-person-plus"></i>
-                    Invite member
+                <a href="#invite-member" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; text-decoration: none; transition: all 150ms ease;">
+                    <i class="bi bi-person-plus" style="font-size: 13px;"></i>
+                    Invite
                 </a>
             </div>
         </section>
 
-        <section class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Total members</p>
-                <p class="mt-2 text-3xl font-bold text-slate-900">{{ $totalMembers }}</p>
-                <p class="mt-1 text-sm text-slate-500">Including the owner</p>
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2px;">
+            <div style="border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
+                <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Members</p>
+                <p style="margin: 4px 0 2px; font-size: 20px; font-weight: 700; color: var(--trackit-text);">{{ $totalMembers }}</p>
+                <p style="margin: 0; font-size: 11px; color: var(--trackit-muted);">Total team</p>
             </div>
 
-            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Active users</p>
-                <p class="mt-2 text-3xl font-bold text-slate-900">{{ $activeMembers }}</p>
-                <p class="mt-1 text-sm text-slate-500">Marked as active</p>
+            <div style="border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
+                <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Active</p>
+                <p style="margin: 4px 0 2px; font-size: 20px; font-weight: 700; color: var(--trackit-text);">{{ $activeMembers }}</p>
+                <p style="margin: 0; font-size: 11px; color: var(--trackit-muted);">Active users</p>
             </div>
 
-            <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Pending invites</p>
-                <p class="mt-2 text-3xl font-bold text-slate-900">{{ count($pendingInvitations) }}</p>
-                <p class="mt-1 text-sm text-slate-500">Waiting for acceptance</p>
+            <div style="border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
+                <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Pending</p>
+                <p style="margin: 4px 0 2px; font-size: 20px; font-weight: 700; color: var(--trackit-text);">{{ count($pendingInvitations) }}</p>
+                <p style="margin: 0; font-size: 11px; color: var(--trackit-muted);">Invites</p>
             </div>
         </section>
 
-        <div class="grid gap-6 lg:grid-cols-[0.95fr_1.35fr]">
-            <aside id="invite-member" class="space-y-6">
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div class="mb-5">
-                        <h2 class="text-2xl font-bold tracking-tight text-slate-900">Invite member</h2>
-                        <p class="mt-1 text-sm text-slate-600">Send an invitation to add someone to the workspace.</p>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 2px; margin-top: 8px;" class="lg:grid-cols-[0.95fr_1.35fr]">
+            <aside id="invite-member" style="display: flex; flex-direction: column; gap: 2px;">
+                <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 10px;">
+                        <h2 style="font-size: 15px; font-weight: 700; color: var(--trackit-text); margin: 0 0 4px;">Invite member</h2>
+                        <p style="font-size: 12px; color: var(--trackit-muted); margin: 0;">Add someone to workspace.</p>
                     </div>
 
-                    <form action="{{ route('teams.invite') }}" method="POST" class="space-y-4">
+                    <form action="{{ route('teams.invite') }}" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
                         @csrf
 
-                        <label class="block">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Email address</span>
-                            <input type="email" name="email" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-sky-500 focus:ring-4 focus:ring-sky-100" placeholder="user@example.com" required>
+                        <label style="display: block;">
+                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Email</span>
+                            <input type="email" name="email" style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;" placeholder="user@example.com" required>
                             @error('email')
-                                <span class="mt-2 block text-sm text-red-600">{{ $message }}</span>
+                                <span style="display: block; margin-top: 4px; font-size: 11px; color: #dc2626;">{{ $message }}</span>
                             @enderror
                         </label>
 
-                        <label class="block">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Role</span>
-                            <select name="role" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100" required>
+                        <label style="display: block;">
+                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Role</span>
+                            <select name="role" style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;" required>
                                 <option value="member">Member</option>
                                 <option value="manager">Manager</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </label>
 
-                        <button type="submit" class="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
-                            <i class="bi bi-send"></i>
-                            Send invitation
+                        <button type="submit" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
+                            <i class="bi bi-send" style="font-size: 13px;"></i>
+                            Send
                         </button>
                     </form>
 
-                    <div class="mt-5 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-100">
-                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Role guide</p>
-                        <div class="mt-3 space-y-2 text-sm text-slate-600">
-                            <div><strong class="text-slate-900">Member:</strong> View and comment</div>
-                            <div><strong class="text-slate-900">Manager:</strong> Create and edit</div>
-                            <div><strong class="text-slate-900">Admin:</strong> Full control</div>
+                    <div style="margin-top: 10px; border-radius: 6px; background: var(--trackit-surface-soft); padding: 8px 10px; border: 1px solid var(--trackit-border);">
+                        <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Roles</p>
+                        <div style="margin-top: 6px; display: flex; flex-direction: column; gap: 4px;">
+                            <div style="font-size: 11px; color: var(--trackit-text);"><strong>Member:</strong> View & comment</div>
+                            <div style="font-size: 11px; color: var(--trackit-text);"><strong>Manager:</strong> Create & edit</div>
+                            <div style="font-size: 11px; color: var(--trackit-text);"><strong>Admin:</strong> Full control</div>
                         </div>
                     </div>
                 </div>
             </aside>
 
-            <section id="members-list" class="space-y-6">
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div class="flex flex-wrap items-center justify-between gap-3">
+            <section id="members-list" style="display: flex; flex-direction: column; gap: 2px;">
+                <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;">
                         <div>
-                            <h2 class="text-2xl font-bold tracking-tight text-slate-900">Team members</h2>
-                            <p class="mt-1 text-sm text-slate-600">The owner is highlighted first, followed by the rest of the team.</p>
+                            <h2 style="font-size: 15px; font-weight: 700; color: var(--trackit-text); margin: 0 0 4px;">Team members</h2>
+                            <p style="font-size: 12px; color: var(--trackit-muted); margin: 0;">Owner first, then team.</p>
                         </div>
-                        <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700">
+                        <span style="display: inline-flex; align-items: center; border-radius: 999px; background: var(--trackit-surface-soft); padding: 4px 10px; font-size: 11px; font-weight: 600; color: var(--trackit-text); border: 1px solid var(--trackit-border);">
                             {{ $totalMembers }} total
                         </span>
                     </div>
 
-                    <div class="mt-6 space-y-4">
+                    <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
                         @if($currentUser)
-                            <article class="rounded-2xl border border-sky-200 bg-sky-50 p-4">
-                                <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                                    <div class="flex items-center gap-4 min-w-0">
-                                        <div class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-slate-900 text-lg font-bold text-white">
-                                            {{ strtoupper(substr($currentUser->name, 0, 1)) }}
-                                            {{ strtoupper(substr(explode(' ', $currentUser->name)[1] ?? '', 0, 1)) }}
+                            <article style="border-radius: 8px; border: 1px solid var(--trackit-primary); background: var(--trackit-primary-soft); padding: 8px 10px;">
+                                <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
+                                    <div style="display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0;">
+                                        <div style="display: flex; width: 32px; height: 32px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 6px; background: var(--trackit-primary); color: white; font-size: 12px; font-weight: 700;">
+                                            {{ strtoupper(substr($currentUser->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $currentUser->name)[1] ?? '', 0, 1)) }}
                                         </div>
-                                        <div class="min-w-0">
-                                            <h3 class="text-lg font-bold text-slate-900">{{ $currentUser->name }}</h3>
-                                            <p class="truncate text-sm text-slate-600">{{ $currentUser->email }}</p>
+                                        <div style="min-width: 0;">
+                                            <h3 style="font-size: 13px; font-weight: 600; color: var(--trackit-text); margin: 0;">{{ $currentUser->name }}</h3>
+                                            <p style="font-size: 11px; color: var(--trackit-muted); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $currentUser->email }}</p>
                                         </div>
                                     </div>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="inline-flex items-center rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">Owner</span>
-                                        <span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">You</span>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                                        <span style="display: inline-flex; align-items: center; border-radius: 999px; background: var(--trackit-primary); color: white; padding: 3px 8px; font-size: 10px; font-weight: 600;">Owner</span>
+                                        <span style="display: inline-flex; align-items: center; border-radius: 999px; background: #d1fae5; color: #065f46; padding: 3px 8px; font-size: 10px; font-weight: 600;">You</span>
                                     </div>
                                 </div>
                             </article>
