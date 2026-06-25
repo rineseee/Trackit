@@ -34,10 +34,10 @@
 
         <div class="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
             <section class="space-y-6">
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div class="mb-5">
-                        <h2 class="text-2xl font-bold tracking-tight text-slate-900">Profile</h2>
-                        <p class="mt-1 text-sm text-slate-600">Keep your main account information up to date.</p>
+                <div style="border-radius: 12px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 20px; font-weight: 700; color: var(--trackit-text); margin: 0 0 8px;">Profile</h2>
+                        <p style="font-size: 14px; color: var(--trackit-muted); margin: 0;">Keep your main account information up to date.</p>
                     </div>
 
                     <form action="{{ route('settings.updateProfile') }}" method="POST" class="grid gap-4 sm:grid-cols-2">
@@ -45,32 +45,32 @@
                         @method('PUT')
 
                         <label class="block sm:col-span-1">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Full name</span>
-                            <input type="text" name="name" value="{{ $user->name }}" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Full name</span>
+                            <input type="text" name="name" value="{{ $user->name }}" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Email address</span>
-                            <input type="email" name="email" value="{{ $user->email }}" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Email address</span>
+                            <input type="email" name="email" value="{{ $user->email }}" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Phone</span>
-                            <input type="tel" name="phone" value="{{ $user->phone ?? '' }}" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Phone</span>
+                            <input type="tel" name="phone" value="{{ $user->phone ?? '' }}" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Company</span>
-                            <input type="text" name="company" value="{{ $user->company ?? '' }}" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Company</span>
+                            <input type="text" name="company" value="{{ $user->company ?? '' }}" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-2">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Bio</span>
-                            <textarea name="bio" rows="4" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">{{ $user->bio ?? '' }}</textarea>
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Bio</span>
+                            <textarea name="bio" rows="4" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease; font-family: inherit;">{{ $user->bio ?? '' }}</textarea>
                         </label>
 
                         <div class="sm:col-span-2">
-                            <button type="submit" class="inline-flex items-center gap-2 rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-700">
+                            <button type="submit" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; background: var(--trackit-primary); color: white; padding: 10px 16px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
                                 <i class="bi bi-check2"></i>
                                 Save profile
                             </button>
@@ -78,10 +78,10 @@
                     </form>
                 </div>
 
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div class="mb-5">
-                        <h2 class="text-2xl font-bold tracking-tight text-slate-900">Password</h2>
-                        <p class="mt-1 text-sm text-slate-600">Use a strong password to keep your account secure.</p>
+                <div style="border-radius: 12px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 20px; font-weight: 700; color: var(--trackit-text); margin: 0 0 8px;">Password</h2>
+                        <p style="font-size: 14px; color: var(--trackit-muted); margin: 0;">Use a strong password to keep your account secure.</p>
                     </div>
 
                     <form action="{{ route('settings.updatePassword') }}" method="POST" class="grid gap-4 sm:grid-cols-2">
@@ -89,22 +89,22 @@
                         @method('PUT')
 
                         <label class="block sm:col-span-2">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Current password</span>
-                            <input type="password" name="current_password" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Current password</span>
+                            <input type="password" name="current_password" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">New password</span>
-                            <input type="password" name="password" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">New password</span>
+                            <input type="password" name="password" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <label class="block sm:col-span-1">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Confirm password</span>
-                            <input type="password" name="password_confirmation" required class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Confirm password</span>
+                            <input type="password" name="password_confirmation" required style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                         </label>
 
                         <div class="sm:col-span-2">
-                            <button type="submit" class="inline-flex items-center gap-2 rounded-2xl bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700">
+                            <button type="submit" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; background: var(--trackit-primary); color: white; padding: 10px 16px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
                                 <i class="bi bi-lock"></i>
                                 Update password
                             </button>
@@ -114,10 +114,10 @@
             </section>
 
             <aside class="space-y-6">
-                <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                    <div class="mb-5">
-                        <h2 class="text-2xl font-bold tracking-tight text-slate-900">Preferences</h2>
-                        <p class="mt-1 text-sm text-slate-600">A few simple choices for how the app feels.</p>
+                <div style="border-radius: 12px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 20px; font-weight: 700; color: var(--trackit-text); margin: 0 0 8px;">Preferences</h2>
+                        <p style="font-size: 14px; color: var(--trackit-muted); margin: 0;">A few simple choices for how the app feels.</p>
                     </div>
 
                     <form action="{{ route('settings.updatePreferences') }}" method="POST" class="space-y-4">
@@ -125,16 +125,16 @@
                         @method('PUT')
 
                         <label class="block">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Theme</span>
-                            <select name="theme" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Theme</span>
+                            <select name="theme" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                                 <option value="light" {{ ($user->preferences['theme'] ?? 'light') === 'light' ? 'selected' : '' }}>Light</option>
                                 <option value="dark" {{ ($user->preferences['theme'] ?? 'light') === 'dark' ? 'selected' : '' }}>Dark</option>
                             </select>
                         </label>
 
                         <label class="block">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Language</span>
-                            <select name="language" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Language</span>
+                            <select name="language" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                                 <option value="en" {{ ($user->preferences['language'] ?? 'en') === 'en' ? 'selected' : '' }}>English</option>
                                 <option value="sq" {{ ($user->preferences['language'] ?? 'en') === 'sq' ? 'selected' : '' }}>Shqip</option>
                                 <option value="it" {{ ($user->preferences['language'] ?? 'en') === 'it' ? 'selected' : '' }}>Italiano</option>
@@ -142,8 +142,8 @@
                         </label>
 
                         <label class="block">
-                            <span class="mb-2 block text-sm font-semibold text-slate-700">Timezone</span>
-                            <select name="timezone" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100">
+                            <span style="display: block; margin-bottom: 8px; font-size: 13px; font-weight: 600; color: var(--trackit-text);">Timezone</span>
+                            <select name="timezone" style="width: 100%; border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 10px 12px; font-size: 13px; outline: none; transition: all 150ms ease;">
                                 <option value="Europe/Budapest" {{ ($user->preferences['timezone'] ?? 'Europe/Budapest') === 'Europe/Budapest' ? 'selected' : '' }}>Europe/Budapest</option>
                                 <option value="Europe/Tirana" {{ ($user->preferences['timezone'] ?? '') === 'Europe/Tirana' ? 'selected' : '' }}>Europe/Tirana</option>
                                 <option value="Europe/Rome" {{ ($user->preferences['timezone'] ?? '') === 'Europe/Rome' ? 'selected' : '' }}>Europe/Rome</option>
