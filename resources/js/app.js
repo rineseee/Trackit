@@ -1,6 +1,3 @@
-import './live-search.js';
-import './toast-notification.js';
-
 const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
 
 function escapeHtml(value) {
