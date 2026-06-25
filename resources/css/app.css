@@ -3781,3 +3781,47 @@ html[data-theme='dark'] a {
 html[data-theme='dark'] a:hover {
     color: var(--trackit-primary-hover);
 }
+
+/* KANBAN DARK MODE SUPPORT */
+html[data-theme='dark'] .kanban-hero {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .kanban-hero h1 {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .kanban-hero p {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .kanban-stat {
+    background: var(--trackit-surface-soft);
+    border-color: var(--trackit-border);
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .kanban-stat .small {
+    color: var(--trackit-muted);
+}
+
+html[data-theme='dark'] .kanban-stat strong {
+    color: var(--trackit-text);
+}
+
+html[data-theme='dark'] .kanban-column {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .kanban-column-header {
+    border-color: var(--trackit-border);
+}
+
+html[data-theme='dark'] .kanban-card {
+    background: var(--trackit-surface);
+    border-color: var(--trackit-border);
+    color: var(--trackit-text);
+}

@@ -71,10 +71,9 @@
             overflow: hidden;
             border: 1px solid rgba(148, 163, 184, 0.12);
             border-radius: 1rem;
-            background:
-                linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
-            padding: 2rem;
+            background: var(--trackit-surface);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+            padding: 1.5rem;
         }
 
         .kanban-hero::after {
@@ -84,9 +83,10 @@
         .kanban-stat {
             border: 1px solid rgba(148, 163, 184, 0.12);
             border-radius: 0.8rem;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
-            padding: 1rem;
+            background: var(--trackit-surface-soft);
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+            padding: 0.8rem;
+            color: var(--trackit-text);
         }
 
         .kanban-column {
