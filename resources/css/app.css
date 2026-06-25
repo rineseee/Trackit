@@ -3825,3 +3825,49 @@ html[data-theme='dark'] .kanban-card {
     border-color: var(--trackit-border);
     color: var(--trackit-text);
 }
+
+/* SIDEBAR ICON ANIMATIONS - MODERN & BEAUTIFUL */
+.trackit-sidebar-link .icon {
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1), color 150ms ease;
+}
+
+.trackit-sidebar-link:hover .icon {
+    transform: scale(1.1);
+}
+
+.trackit-sidebar-link.active .icon {
+    animation: slideInIcon 300ms ease;
+}
+
+@keyframes slideInIcon {
+    0% {
+        transform: translateX(-4px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.trackit-sidebar-brand i {
+    transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.trackit-sidebar-brand:hover i {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* BRAND ICON SUBTLE ANIMATION */
+@keyframes brandPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.85;
+    }
+}
+
+.trackit-sidebar-brand i {
+    animation: brandPulse 3s ease-in-out infinite;
+}
