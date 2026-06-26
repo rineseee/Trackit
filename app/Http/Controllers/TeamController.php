@@ -47,9 +47,9 @@ class TeamController extends Controller
      */
     public function invite(Request $request)
     {
-        // Only admins can invite members
-        if (!auth()->user()->isAdmin()) {
-            \Log::warning("Non-admin user " . auth()->id() . " attempted to invite team members");
+        // Only owner or admins can invite members
+        if (!auth()->user()->isOwner() && !auth()->user()->isAdmin()) {
+            \Log::warning("Non-admin/non-owner user " . auth()->id() . " attempted to invite team members");
             return back()->with('error', 'Unauthorized');
         }
 
@@ -119,8 +119,8 @@ class TeamController extends Controller
     {
         $member = User::findOrFail($memberId);
 
-        // Only allow admin to remove
-        if (!auth()->user()->isAdmin()) {
+        // Only allow owner or admin to remove
+        if (!auth()->user()->isOwner() && !auth()->user()->isAdmin()) {
             return back()->with('error', 'Unauthorized');
         }
 

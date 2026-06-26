@@ -511,10 +511,8 @@
             <h1>Tags</h1>
             <div class="tags-header-actions">
                 @auth
-                    <button class="ui-button primary" onclick="document.getElementById('scrollToForm').scrollIntoView({behavior: 'smooth'})">
-                        <i class="bi bi-plus-lg"></i>
-                        New Tag
-                    </button>
+
+
                 @else
                     <a href="{{ route('login') }}" class="ui-button primary">
                         <i class="bi bi-box-arrow-in-right"></i>
@@ -570,7 +568,8 @@
                         @csrf
 
                         @if ($errors->any())
-                            <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #dc2626; border-radius: 6px; padding: 10px; margin-bottom: 12px;">
+                            <div
+                                style="background: rgba(239, 68, 68, 0.1); border: 1px solid #dc2626; border-radius: 6px; padding: 10px; margin-bottom: 12px;">
                                 @foreach ($errors->all() as $error)
                                     <p style="margin: 4px 0; font-size: 12px; color: #dc2626;">{{ $error }}</p>
                                 @endforeach
@@ -579,7 +578,8 @@
 
                         <div class="form-group">
                             <label class="form-label">Tag Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" placeholder="e.g., bug, feature, docs" class="form-input" required>
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="e.g., bug, feature, docs"
+                                class="form-input" required>
                         </div>
 
                         <div class="form-group">
@@ -591,10 +591,12 @@
                                     <label for="red" class="color-preset" style="background: #dc2626;" title="Red"></label>
 
                                     <input type="radio" name="color_preset" value="#f97316" id="orange" style="display: none;">
-                                    <label for="orange" class="color-preset" style="background: #f97316;" title="Orange"></label>
+                                    <label for="orange" class="color-preset" style="background: #f97316;"
+                                        title="Orange"></label>
 
                                     <input type="radio" name="color_preset" value="#eab308" id="yellow" style="display: none;">
-                                    <label for="yellow" class="color-preset" style="background: #eab308;" title="Yellow"></label>
+                                    <label for="yellow" class="color-preset" style="background: #eab308;"
+                                        title="Yellow"></label>
 
                                     <input type="radio" name="color_preset" value="#22c55e" id="green" style="display: none;">
                                     <label for="green" class="color-preset" style="background: #22c55e;" title="Green"></label>
@@ -603,7 +605,8 @@
                                     <label for="blue" class="color-preset" style="background: #0ea5e9;" title="Blue"></label>
 
                                     <input type="radio" name="color_preset" value="#8b5cf6" id="purple" style="display: none;">
-                                    <label for="purple" class="color-preset" style="background: #8b5cf6;" title="Purple"></label>
+                                    <label for="purple" class="color-preset" style="background: #8b5cf6;"
+                                        title="Purple"></label>
 
                                     <input type="radio" name="color_preset" value="#ec4899" id="pink" style="display: none;">
                                     <label for="pink" class="color-preset" style="background: #ec4899;" title="Pink"></label>
@@ -614,8 +617,10 @@
                             </div>
 
                             <div class="color-input-group" style="margin-top: 8px;">
-                                <input type="color" id="colorPicker" name="color" value="{{ old('color', '#0ea5e9') }}" class="color-input">
-                                <input type="text" id="colorHex" name="color_hex" value="{{ old('color', '#0ea5e9') }}" class="color-text-input" placeholder="#0ea5e9" maxlength="7">
+                                <input type="color" id="colorPicker" name="color" value="{{ old('color', '#0ea5e9') }}"
+                                    class="color-input">
+                                <input type="text" id="colorHex" name="color_hex" value="{{ old('color', '#0ea5e9') }}"
+                                    class="color-text-input" placeholder="#0ea5e9" maxlength="7">
                             </div>
                         </div>
 
@@ -676,7 +681,8 @@
                             <a href="{{ route('tags.edit', $tag) }}" class="icon-button" title="Edit tag">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <form action="{{ route('tags.destroy', $tag) }}" method="POST" style="display: inline;" onsubmit="return confirm('Delete this tag?')">
+                            <form action="{{ route('tags.destroy', $tag) }}" method="POST" style="display: inline;"
+                                onsubmit="return confirm('Delete this tag?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="icon-button danger" title="Delete tag">
