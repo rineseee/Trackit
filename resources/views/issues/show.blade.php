@@ -368,6 +368,228 @@
         html[data-theme='dark'] .modal-footer {
             border-top-color: #334155 !important;
         }
+
+        /* Search and scroll areas */
+        html[data-theme='dark'] .search-field {
+            background-color: #0f172a;
+            border-color: #334155;
+        }
+
+        html[data-theme='dark'] .search-field input {
+            background-color: transparent;
+            color: #f1f5f9;
+        }
+
+        html[data-theme='dark'] .search-field input::placeholder {
+            color: #64748b;
+        }
+
+        html[data-theme='dark'] .scroll-area {
+            background-color: #0f172a;
+        }
+
+        /* Empty state styling */
+        html[data-theme='dark'] .empty-state {
+            background: linear-gradient(180deg, #1e293b, #0f172a);
+            border-color: #334155;
+        }
+
+        html[data-theme='dark'] .empty-state .fw-bold {
+            color: #f1f5f9 !important;
+        }
+
+        /* Comment bubbles */
+        html[data-theme='dark'] .comment-body {
+            background-color: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        html[data-theme='dark'] .comment-body::before {
+            background-color: #0f172a;
+            border-left-color: #334155;
+            border-bottom-color: #334155;
+        }
+
+        html[data-theme='dark'] .comment-bubble.meta-right .comment-body {
+            background-color: #1e293b;
+            border-color: #334155;
+        }
+
+        html[data-theme='dark'] .comment-bubble.meta-right .comment-body::before {
+            background-color: #1e293b;
+            border-left-color: #334155;
+            border-bottom-color: #334155;
+        }
+
+        /* Chips and pills */
+        html[data-theme='dark'] .tag-chip,
+        html[data-theme='dark'] .member-chip {
+            background-color: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        html[data-theme='dark'] .tag-action {
+            background-color: #334155;
+            color: #94a3b8;
+        }
+
+        html[data-theme='dark'] .tag-action:hover {
+            background-color: #475569;
+            color: #cbd5e1;
+        }
+
+        html[data-theme='dark'] .tag-action.attached {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        html[data-theme='dark'] .tag-action.detached {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #2563eb;
+        }
+
+        /* Hero and section cards */
+        html[data-theme='dark'] .hero-card {
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent 28%),
+                        radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.05), transparent 22%),
+                        linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        /* Toast styles */
+        html[data-theme='dark'] .toast {
+            background-color: #1e293b !important;
+            color: #f1f5f9 !important;
+        }
+
+        html[data-theme='dark'] .text-bg-success {
+            background-color: #0f5f4d !important;
+            color: #10b981 !important;
+        }
+
+        html[data-theme='dark'] .text-bg-danger {
+            background-color: #5f1514 !important;
+            color: #f87171 !important;
+        }
+
+        /* Hero kicker and pills in dark mode */
+        html[data-theme='dark'] .hero-kicker {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #2563eb;
+        }
+
+        html[data-theme='dark'] .muted-pill {
+            background-color: #334155;
+            color: #94a3b8;
+        }
+
+        /* Status and priority pills */
+        html[data-theme='dark'] .status-open {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+        }
+
+        html[data-theme='dark'] .status-in_progress {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+        }
+
+        html[data-theme='dark'] .status-closed {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #6ee7b7;
+        }
+
+        html[data-theme='dark'] .priority-high {
+            background-color: rgba(220, 38, 38, 0.2);
+            color: #f87171;
+        }
+
+        html[data-theme='dark'] .priority-medium {
+            background-color: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+        }
+
+        html[data-theme='dark'] .priority-low {
+            background-color: rgba(100, 116, 139, 0.2);
+            color: #cbd5e1;
+        }
+
+        html[data-theme='dark'] .project-pill {
+            background-color: rgba(37, 99, 235, 0.2);
+            color: #60a5fa;
+        }
+
+        html[data-theme='dark'] .date-pill {
+            background-color: rgba(14, 165, 233, 0.2);
+            color: #22d3ee;
+        }
+
+        /* Form labels in dark mode */
+        html[data-theme='dark'] .form-label {
+            color: #f1f5f9;
+        }
+
+        /* Section titles */
+        html[data-theme='dark'] .section-title {
+            color: #f1f5f9;
+        }
+
+        html[data-theme='dark'] .detail-label {
+            color: #94a3b8;
+        }
+
+        html[data-theme='dark'] .detail-value {
+            color: #f1f5f9;
+        }
+
+        /* Button primary in dark mode */
+        html[data-theme='dark'] .btn-primary {
+            background-color: #2563eb;
+            border-color: #2563eb;
+            color: #fff;
+        }
+
+        html[data-theme='dark'] .btn-primary:hover {
+            background-color: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
+        html[data-theme='dark'] .btn-primary:focus {
+            background-color: #1d4ed8;
+            border-color: #1d4ed8;
+            box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
+        }
+
+        /* Hero card title */
+        html[data-theme='dark'] .hero-title {
+            color: #f1f5f9;
+        }
+
+        /* Links in dark mode */
+        html[data-theme='dark'] a {
+            color: #2563eb;
+        }
+
+        html[data-theme='dark'] a:hover {
+            color: #60a5fa;
+        }
+
+        /* Whitespace pre-line for dark mode */
+        html[data-theme='dark'] .whitespace-pre-line {
+            color: #f1f5f9;
+        }
+
+        /* Additional form styling */
+        html[data-theme='dark'] .form-control.form-control-color {
+            border-color: #334155;
+        }
+
+        /* Rounded backgrounds */
+        html[data-theme='dark'] .rounded-4 {
+            background-color: #0f172a;
+            border-color: #334155 !important;
+        }
     </style>
 @endpush
 
