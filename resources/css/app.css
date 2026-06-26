@@ -1969,13 +1969,13 @@
     .ui-button.primary {
         background: var(--trackit-primary);
         border-color: var(--trackit-primary);
-        color: #ffffff;
+        color: #ffffff !important;
     }
 
     .ui-button.primary:hover {
         background: var(--trackit-primary-hover);
         border-color: var(--trackit-primary-hover);
-        color: #ffffff;
+        color: #ffffff !important;
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     }
@@ -1983,13 +1983,13 @@
     .ui-button.secondary {
         background: #000000;
         border-color: #000000;
-        color: #ffffff;
+        color: #ffffff !important;
     }
 
     .ui-button.secondary:hover {
         background: #1f2937;
         border-color: #1f2937;
-        color: #ffffff;
+        color: #ffffff !important;
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     }
