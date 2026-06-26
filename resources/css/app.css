@@ -2559,22 +2559,22 @@
         color: #3b82f6;
     }
 
-    /* Active state - VERY VISIBLE */
+    /* Active state - Gray background instead of blue */
     .trackit-sidebar-link.active {
-        color: white;
+        color: var(--trackit-primary);
         font-weight: 800;
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
-        border-color: #3b82f6;
-        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        border-color: #cbd5e1;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .trackit-sidebar-link.active::before {
-        transform: scaleY(1);
+        transform: scaleY(0);
     }
 
     .trackit-sidebar-link.active i {
-        color: white;
-        transform: scale(1.18);
+        color: var(--trackit-primary);
+        transform: scale(1.12);
     }
 
     /* Icon styling */
@@ -2664,9 +2664,10 @@
     }
 
     html[data-theme='dark'] .trackit-sidebar-link.active {
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
-        border-color: #3b82f6;
-        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        color: #3b82f6;
+        background: linear-gradient(135deg, #334155, #1e293b);
+        border-color: #475569;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     html[data-theme='dark'] .trackit-sidebar-section-title {
