@@ -763,9 +763,6 @@
             select.disabled = true;
             select.style.opacity = '0.6';
 
-            // Submit via AJAX
-            const formData = new FormData(form);
-
             console.log('Submitting role change for member', memberId, 'to role', newRole);
             console.log('Form action:', form.action);
 
