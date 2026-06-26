@@ -3625,13 +3625,12 @@ html[data-theme='dark'] .form-field label {
 
 html[data-theme='dark'] .ui-button.primary,
 html[data-theme='dark'] .ui-button.secondary {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
+html[data-theme='dark'] .ui-button.primary:hover,
 html[data-theme='dark'] .ui-button.secondary:hover {
-    background: #374151;
-    border-color: #4b5563;
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 html[data-theme='dark'] h1,
