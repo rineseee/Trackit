@@ -3,220 +3,731 @@
 @section('title', 'Team Management')
 
 @section('content')
-    <div class="mx-auto max-w-7xl space-y-3">
-        <section style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
-                <div>
-                    <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Team Management</p>
-                    <h1 style="margin: 4px 0 0; font-size: 18px; font-weight: 700; color: var(--trackit-text); letter-spacing: -0.01em;">Manage your team</h1>
-                    <p style="margin: 4px 0 0; font-size: 12px; color: var(--trackit-muted); line-height: 1.5;">Invite members and manage roles.</p>
+    <style>
+        .teams-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .teams-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--trackit-border);
+        }
+
+        .teams-header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--trackit-text);
+        }
+
+        .teams-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .metric-card {
+            background: var(--trackit-surface);
+            border: 1px solid var(--trackit-border);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--trackit-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 3px;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--trackit-text);
+            margin-bottom: 2px;
+        }
+
+        .metric-desc {
+            font-size: 10px;
+            color: var(--trackit-muted);
+        }
+
+        .teams-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 16px;
+        }
+
+        .form-panel {
+            background: var(--trackit-surface);
+            border: 1px solid var(--trackit-border);
+            border-radius: 10px;
+            padding: 16px;
+            height: fit-content;
+            position: sticky;
+            top: 0;
+        }
+
+        .form-header {
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--trackit-border);
+        }
+
+        .form-header h2 {
+            margin: 0 0 2px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--trackit-text);
+        }
+
+        .form-header p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--trackit-muted);
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--trackit-text);
+            margin-bottom: 4px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--trackit-border);
+            background: var(--trackit-surface-soft);
+            color: var(--trackit-text);
+            border-radius: 6px;
+            font-size: 12px;
+            transition: all 150ms ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            border-color: var(--trackit-primary);
+            outline: none;
+            background: var(--trackit-surface);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 8px 14px;
+            background: var(--trackit-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 150ms ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .form-submit:hover {
+            opacity: 0.9;
+        }
+
+        .roles-info {
+            margin-top: 12px;
+            padding: 10px;
+            background: var(--trackit-surface-soft);
+            border-radius: 6px;
+            border: 1px solid var(--trackit-border);
+        }
+
+        .roles-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--trackit-muted);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .role-item {
+            font-size: 11px;
+            color: var(--trackit-text);
+            margin-bottom: 3px;
+        }
+
+        .role-item strong {
+            font-weight: 600;
+        }
+
+        .members-panel {
+            background: var(--trackit-surface);
+            border: 1px solid var(--trackit-border);
+            border-radius: 10px;
+            padding: 16px;
+        }
+
+        .members-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--trackit-border);
+        }
+
+        .members-header h2 {
+            margin: 0 0 2px;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--trackit-text);
+        }
+
+        .members-header p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--trackit-muted);
+        }
+
+        .member-count {
+            display: inline-flex;
+            align-items: center;
+            background: var(--trackit-surface-soft);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--trackit-muted);
+            border: 1px solid var(--trackit-border);
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .member-card {
+            background: var(--trackit-surface-soft);
+            border: 1px solid var(--trackit-border);
+            border-radius: 8px;
+            padding: 12px;
+            transition: all 150ms ease;
+        }
+
+        .member-card:hover {
+            border-color: var(--trackit-primary);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+        }
+
+        .member-card.owner {
+            border-color: var(--trackit-primary);
+            background: var(--trackit-primary-soft);
+        }
+
+        .member-header {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .member-avatar {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 6px;
+            background: var(--trackit-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .member-card.owner .member-avatar {
+            background: var(--trackit-primary);
+        }
+
+        .member-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .member-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--trackit-text);
+            margin: 0;
+            word-break: break-word;
+        }
+
+        .member-email {
+            font-size: 11px;
+            color: var(--trackit-muted);
+            margin: 2px 0 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .member-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .badge-owner {
+            background: var(--trackit-primary);
+            color: white;
+        }
+
+        .badge-you {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge-active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-inactive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .member-actions {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--trackit-border);
+        }
+
+        .role-select {
+            flex: 1;
+            padding: 4px 6px;
+            font-size: 11px;
+            border-radius: 4px;
+            border: 1px solid var(--trackit-border);
+            background: var(--trackit-surface);
+            color: var(--trackit-text);
+            cursor: pointer;
+        }
+
+        .role-select:focus {
+            border-color: var(--trackit-primary);
+            outline: none;
+        }
+
+        .delete-btn {
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: 1px solid var(--trackit-border);
+            background: var(--trackit-surface);
+            color: var(--trackit-text);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 150ms ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .delete-btn:hover {
+            border-color: #dc2626;
+            color: #dc2626;
+        }
+
+        .pending-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--trackit-border);
+        }
+
+        .pending-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .pending-header h3 {
+            margin: 0 0 2px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--trackit-text);
+        }
+
+        .pending-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .pending-table thead {
+            background: var(--trackit-surface-soft);
+            border-bottom: 1px solid var(--trackit-border);
+        }
+
+        .pending-table th {
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--trackit-muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .pending-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--trackit-border);
+            color: var(--trackit-text);
+        }
+
+        .pending-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pending-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 9px;
+            font-weight: 700;
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563eb;
+        }
+
+        .cancel-btn {
+            padding: 4px 8px;
+            font-size: 11px;
+            border-radius: 4px;
+            border: 1px solid var(--trackit-border);
+            background: var(--trackit-surface);
+            color: var(--trackit-text);
+            cursor: pointer;
+            transition: all 150ms ease;
+        }
+
+        .cancel-btn:hover {
+            background: #fee2e2;
+            border-color: #dc2626;
+            color: #dc2626;
+        }
+
+        .empty-state {
+            padding: 20px;
+            text-align: center;
+            color: var(--trackit-muted);
+            font-size: 12px;
+        }
+
+        @media (max-width: 1024px) {
+            .teams-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .form-panel {
+                position: relative;
+            }
+
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .teams-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .pending-table {
+                font-size: 11px;
+            }
+
+            .pending-table th,
+            .pending-table td {
+                padding: 6px 8px;
+            }
+        }
+
+        html[data-theme='dark'] .form-panel,
+        html[data-theme='dark'] .members-panel,
+        html[data-theme='dark'] .metric-card,
+        html[data-theme='dark'] .member-card {
+            background: var(--trackit-surface);
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        html[data-theme='dark'] .form-input,
+        html[data-theme='dark'] .form-select,
+        html[data-theme='dark'] .role-select {
+            background: var(--trackit-surface-soft);
+            border-color: rgba(148, 163, 184, 0.2);
+            color: var(--trackit-text);
+        }
+
+        html[data-theme='dark'] .roles-info {
+            background: var(--trackit-surface-soft);
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        html[data-theme='dark'] .member-card {
+            background: var(--trackit-surface-soft);
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        html[data-theme='dark'] .pending-table thead {
+            background: var(--trackit-surface-soft);
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        html[data-theme='dark'] .pending-table td,
+        html[data-theme='dark'] .pending-table th {
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+    </style>
+
+    <div class="teams-wrapper">
+        <!-- HEADER -->
+        <div class="teams-header">
+            <h1>Team Management</h1>
+        </div>
+
+        <!-- METRICS -->
+        <div class="teams-metrics">
+            <div class="metric-card">
+                <div class="metric-label">Members</div>
+                <div class="metric-value">{{ $totalMembers }}</div>
+                <div class="metric-desc">Total team</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Active</div>
+                <div class="metric-value">{{ $activeMembers }}</div>
+                <div class="metric-desc">Active users</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Pending</div>
+                <div class="metric-value">{{ count($pendingInvitations) }}</div>
+                <div class="metric-desc">Invites</div>
+            </div>
+        </div>
+
+        <!-- TWO COLUMN LAYOUT -->
+        <div class="teams-layout">
+            <!-- LEFT: FORM PANEL -->
+            <div class="form-panel" id="invite-member">
+                <div class="form-header">
+                    <h2>Invite member</h2>
+                    <p>Add someone to your team</p>
                 </div>
 
-                <a href="#invite-member" style="display: inline-flex; align-items: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; text-decoration: none; transition: all 150ms ease;">
-                    <i class="bi bi-person-plus" style="font-size: 13px;"></i>
-                    Invite
-                </a>
-            </div>
-        </section>
+                <form action="{{ route('teams.invite') }}" method="POST">
+                    @csrf
 
-        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2px;">
-            <div style="border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-                <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Members</p>
-                <p style="margin: 4px 0 2px; font-size: 20px; font-weight: 700; color: var(--trackit-text);">{{ $totalMembers }}</p>
-                <p style="margin: 0; font-size: 11px; color: var(--trackit-muted);">Total team</p>
-            </div>
+                    @if ($errors->any())
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #dc2626; border-radius: 6px; padding: 8px; margin-bottom: 10px;">
+                            @foreach ($errors->all() as $error)
+                                <p style="margin: 4px 0; font-size: 11px; color: #dc2626;">{{ $error }}</p>
+                            @endforeach
+                        </div>
+                    @endif
 
-            <div style="border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-                <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Active</p>
-                <p style="margin: 4px 0 2px; font-size: 20px; font-weight: 700; color: var(--trackit-text);">{{ $activeMembers }}</p>
-                <p style="margin: 0; font-size: 11px; color: var(--trackit-muted);">Active users</p>
-            </div>
-
-            <div style="border-radius: 8px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 10px 12px; box-shadow: 0 1px 2px rgba(0,0,0,0.03);">
-                <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Pending</p>
-                <p style="margin: 4px 0 2px; font-size: 20px; font-weight: 700; color: var(--trackit-text);">{{ count($pendingInvitations) }}</p>
-                <p style="margin: 0; font-size: 11px; color: var(--trackit-muted);">Invites</p>
-            </div>
-        </section>
-
-        <div style="display: grid; grid-template-columns: 1fr; gap: 2px; margin-top: 8px;" class="lg:grid-cols-[0.95fr_1.35fr]">
-            <aside id="invite-member" style="display: flex; flex-direction: column; gap: 2px;">
-                <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                    <div style="margin-bottom: 10px;">
-                        <h2 style="font-size: 15px; font-weight: 700; color: var(--trackit-text); margin: 0 0 4px;">Invite member</h2>
-                        <p style="font-size: 12px; color: var(--trackit-muted); margin: 0;">Add someone to workspace.</p>
-                    </div>
-
-                    <form action="{{ route('teams.invite') }}" method="POST" style="display: flex; flex-direction: column; gap: 8px;">
-                        @csrf
-
-                        <label style="display: block;">
-                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Email</span>
-                            <input type="email" name="email" style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;" placeholder="user@example.com" required>
-                            @error('email')
-                                <span style="display: block; margin-top: 4px; font-size: 11px; color: #dc2626;">{{ $message }}</span>
-                            @enderror
-                        </label>
-
-                        <label style="display: block;">
-                            <span style="display: block; margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--trackit-text);">Role</span>
-                            <select name="role" style="width: 100%; border-radius: 6px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); color: var(--trackit-text); padding: 8px 10px; font-size: 12px; outline: none; transition: all 150ms ease;" required>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" placeholder="user@example.com" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Role</label>
+                            <select name="role" class="form-select" required>
                                 <option value="member">Member</option>
                                 <option value="manager">Manager</option>
                                 <option value="admin">Admin</option>
                             </select>
-                        </label>
-
-                        <button type="submit" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 6px; background: var(--trackit-primary); color: white; padding: 8px 14px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; transition: all 150ms ease;">
-                            <i class="bi bi-send" style="font-size: 13px;"></i>
-                            Send
-                        </button>
-                    </form>
-
-                    <div style="margin-top: 10px; border-radius: 6px; background: var(--trackit-surface-soft); padding: 8px 10px; border: 1px solid var(--trackit-border);">
-                        <p style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--trackit-muted); margin: 0;">Roles</p>
-                        <div style="margin-top: 6px; display: flex; flex-direction: column; gap: 4px;">
-                            <div style="font-size: 11px; color: var(--trackit-text);"><strong>Member:</strong> View & comment</div>
-                            <div style="font-size: 11px; color: var(--trackit-text);"><strong>Manager:</strong> Create & edit</div>
-                            <div style="font-size: 11px; color: var(--trackit-text);"><strong>Admin:</strong> Full control</div>
                         </div>
                     </div>
+
+                    <button type="submit" class="form-submit">
+                        <i class="bi bi-person-plus"></i>
+                        Invite
+                    </button>
+
+                    <div class="roles-info">
+                        <span class="roles-label">Roles</span>
+                        <div class="role-item"><strong>Member:</strong> View & comment</div>
+                        <div class="role-item"><strong>Manager:</strong> Create & edit</div>
+                        <div class="role-item"><strong>Admin:</strong> Full control</div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- RIGHT: MEMBERS PANEL -->
+            <div class="members-panel">
+                <div class="members-header">
+                    <div>
+                        <h2>Team members</h2>
+                        <p>Owner first, then team</p>
+                    </div>
+                    <span class="member-count">{{ $totalMembers }} total</span>
                 </div>
-            </aside>
 
-            <section id="members-list" style="display: flex; flex-direction: column; gap: 2px;">
-                <div style="border-radius: 10px; border: 1px solid var(--trackit-border); background: var(--trackit-surface); padding: 12px 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;">
-                        <div>
-                            <h2 style="font-size: 15px; font-weight: 700; color: var(--trackit-text); margin: 0 0 4px;">Team members</h2>
-                            <p style="font-size: 12px; color: var(--trackit-muted); margin: 0;">Owner first, then team.</p>
-                        </div>
-                        <span style="display: inline-flex; align-items: center; border-radius: 999px; background: var(--trackit-surface-soft); padding: 4px 10px; font-size: 11px; font-weight: 600; color: var(--trackit-text); border: 1px solid var(--trackit-border);">
-                            {{ $totalMembers }} total
-                        </span>
-                    </div>
-
-                    <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
-                        @if($currentUser)
-                            <article style="border-radius: 8px; border: 1px solid var(--trackit-primary); background: var(--trackit-primary-soft); padding: 8px 10px;">
-                                <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start;">
-                                    <div style="display: flex; align-items: center; gap: 8px; width: 100%; min-width: 0;">
-                                        <div style="display: flex; width: 32px; height: 32px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 6px; background: var(--trackit-primary); color: white; font-size: 12px; font-weight: 700;">
-                                            {{ strtoupper(substr($currentUser->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $currentUser->name)[1] ?? '', 0, 1)) }}
-                                        </div>
-                                        <div style="min-width: 0;">
-                                            <h3 style="font-size: 13px; font-weight: 600; color: var(--trackit-text); margin: 0;">{{ $currentUser->name }}</h3>
-                                            <p style="font-size: 11px; color: var(--trackit-muted); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ $currentUser->email }}</p>
-                                        </div>
-                                    </div>
-                                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">
-                                        <span style="display: inline-flex; align-items: center; border-radius: 999px; background: var(--trackit-primary); color: white; padding: 3px 8px; font-size: 10px; font-weight: 600;">Owner</span>
-                                        <span style="display: inline-flex; align-items: center; border-radius: 999px; background: #d1fae5; color: #065f46; padding: 3px 8px; font-size: 10px; font-weight: 600;">You</span>
-                                    </div>
+                <div class="members-grid">
+                    @if($currentUser)
+                        <div class="member-card owner">
+                            <div class="member-header">
+                                <div class="member-avatar">
+                                    {{ strtoupper(substr($currentUser->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $currentUser->name)[1] ?? '', 0, 1)) }}
                                 </div>
-                            </article>
-                        @endif
+                                <div class="member-info">
+                                    <p class="member-name">{{ $currentUser->name }}</p>
+                                    <p class="member-email">{{ $currentUser->email }}</p>
+                                </div>
+                            </div>
+                            <div class="member-badges">
+                                <span class="badge badge-owner">Owner</span>
+                                <span class="badge badge-you">You</span>
+                            </div>
+                        </div>
+                    @endif
 
-                        @forelse($teamMembers as $member)
-                            <article class="team-member-item">
-                                <div class="team-member-avatar">
+                    @forelse($teamMembers as $member)
+                        <div class="member-card">
+                            <div class="member-header">
+                                <div class="member-avatar" style="background: #6366f1;">
                                     {{ strtoupper(substr($member->name, 0, 1)) }}{{ strtoupper(substr(explode(' ', $member->name)[1] ?? '', 0, 1)) }}
                                 </div>
-                                <div class="team-member-info">
-                                    <div class="team-member-name">{{ $member->name }}</div>
-                                    <div class="team-member-email">{{ $member->email }}</div>
-                                    <div class="team-member-meta">
-                                        <span class="team-role-badge">{{ ucfirst($member->role ?? 'member') }}</span>
-                                        @if($member->is_active ?? true)
-                                            <span class="team-status-badge">Active</span>
-                                        @else
-                                            <span class="team-status-badge inactive">Inactive</span>
-                                        @endif
-                                    </div>
+                                <div class="member-info">
+                                    <p class="member-name">{{ $member->name }}</p>
+                                    <p class="member-email">{{ $member->email }}</p>
                                 </div>
-
-                                <div class="team-member-actions">
-                                    <form action="{{ route('teams.updateRole', $member->id) }}" method="POST" style="margin: 0;">
-                                        @csrf
-                                        @method('PUT')
-                                        <select name="role" onchange="this.form.submit()" title="Change role">
-                                            <option value="member" {{ ($member->role ?? 'member') === 'member' ? 'selected' : '' }}>Member</option>
-                                            <option value="manager" {{ ($member->role ?? 'member') === 'manager' ? 'selected' : '' }}>Manager</option>
-                                            <option value="admin" {{ ($member->role ?? 'member') === 'admin' ? 'selected' : '' }}>Admin</option>
-                                        </select>
-                                    </form>
-
-                                    <form action="{{ route('teams.remove', $member->id) }}" method="POST" onsubmit="return confirm('Remove {{ $member->name }}?')" style="margin: 0;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" title="Remove member">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </article>
-                        @empty
-                            @if(!$currentUser)
-                                <div class="rounded-2xl border border-dashed border-slate-300 px-6 py-10 text-center text-slate-600">
-                                    No team members yet.
-                                </div>
-                            @endif
-                        @endforelse
-                    </div>
+                            </div>
+                            <div class="member-badges">
+                                <span class="badge" style="background: #dbeafe; color: #1e40af;">{{ ucfirst($member->role ?? 'member') }}</span>
+                                @if($member->is_active ?? true)
+                                    <span class="badge badge-active">Active</span>
+                                @else
+                                    <span class="badge badge-inactive">Inactive</span>
+                                @endif
+                            </div>
+                            <div class="member-actions">
+                                <form action="{{ route('teams.updateRole', $member->id) }}" method="POST" style="flex: 1;">
+                                    @csrf
+                                    @method('PUT')
+                                    <select name="role" onchange="this.form.submit()" class="role-select">
+                                        <option value="member" {{ ($member->role ?? 'member') === 'member' ? 'selected' : '' }}>Member</option>
+                                        <option value="manager" {{ ($member->role ?? 'member') === 'manager' ? 'selected' : '' }}>Manager</option>
+                                        <option value="admin" {{ ($member->role ?? 'member') === 'admin' ? 'selected' : '' }}>Admin</option>
+                                    </select>
+                                </form>
+                                <form action="{{ route('teams.remove', $member->id) }}" method="POST" onsubmit="return confirm('Remove {{ $member->name }}?')" style="margin: 0;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" title="Remove member" class="delete-btn">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @empty
+                        @if($currentUser)
+                            <div style="grid-column: 1 / -1;">
+                                <div class="empty-state">No additional team members yet.</div>
+                            </div>
+                        @endif
+                    @endforelse
                 </div>
 
                 @if(count($pendingInvitations) > 0)
-                    <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                        <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div class="pending-section">
+                        <div class="pending-header">
                             <div>
-                                <h2 class="text-2xl font-bold tracking-tight text-slate-900">Pending invitations</h2>
-                                <p class="mt-1 text-sm text-slate-600">Waiting invites that can still be cancelled.</p>
+                                <h3>Pending invitations</h3>
+                                <p style="margin: 0; font-size: 11px; color: var(--trackit-muted);">Waiting invites that can be cancelled</p>
                             </div>
-                            <span class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700">
-                                {{ count($pendingInvitations) }} pending
-                            </span>
+                            <span class="member-count">{{ count($pendingInvitations) }} pending</span>
                         </div>
 
-                        <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200">
-                            <table class="w-full">
-                                <thead class="bg-slate-50">
+                        <table class="pending-table">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Invited by</th>
+                                    <th>Sent</th>
+                                    <th style="text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($pendingInvitations as $inv)
                                     <tr>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Email</th>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Role</th>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Invited by</th>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Sent</th>
-                                        <th class="px-4 py-3 text-right text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Action</th>
+                                        <td>{{ $inv['email'] }}</td>
+                                        <td><span class="pending-badge">{{ ucfirst($inv['role']) }}</span></td>
+                                        <td>{{ $inv['invited_by'] }}</td>
+                                        <td>{{ $inv['sent_at'] }}</td>
+                                        <td style="text-align: right;">
+                                            <form action="{{ route('teams.cancelInvitation', $inv['email']) }}" method="POST" onsubmit="return confirm('Cancel this invitation?')" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="cancel-btn">Cancel</button>
+                                            </form>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-200 bg-white">
-                                    @foreach($pendingInvitations as $inv)
-                                        <tr>
-                                            <td class="px-4 py-4 text-sm text-slate-900">{{ $inv['email'] }}</td>
-                                            <td class="px-4 py-4">
-                                                <span class="inline-flex items-center rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">
-                                                    {{ ucfirst($inv['role']) }}
-                                                </span>
-                                            </td>
-                                            <td class="px-4 py-4 text-sm text-slate-600">{{ $inv['invited_by'] }}</td>
-                                            <td class="px-4 py-4 text-sm text-slate-600">{{ $inv['sent_at'] }}</td>
-                                            <td class="px-4 py-4 text-right">
-                                                <form action="{{ route('teams.cancelInvitation', $inv['email']) }}" method="POST" onsubmit="return confirm('Cancel this invitation?')">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
-                                                        <i class="bi bi-x-lg"></i>
-                                                        Cancel
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 @endif
-            </section>
+            </div>
         </div>
     </div>
+
 @endsection
