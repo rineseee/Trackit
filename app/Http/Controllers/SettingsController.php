@@ -121,14 +121,14 @@ class SettingsController extends Controller
         // Get all form inputs
         $input = $request->all();
 
-        // Convert checkboxes: checked = true, unchecked = missing from request
+        // Convert checkbox values to boolean (0 or 1 from form → true/false)
         $notifications = [
-            'notifications_email' => isset($input['notifications_email']),
-            'notifications_push' => isset($input['notifications_push']),
-            'notifications_sms' => isset($input['notifications_sms']),
-            'notifications_issues' => isset($input['notifications_issues']),
-            'notifications_comments' => isset($input['notifications_comments']),
-            'notifications_mentions' => isset($input['notifications_mentions']),
+            'notifications_email' => (bool) $input['notifications_email'],
+            'notifications_push' => (bool) $input['notifications_push'],
+            'notifications_sms' => (bool) $input['notifications_sms'],
+            'notifications_issues' => (bool) ($input['notifications_issues'] ?? 0),
+            'notifications_comments' => (bool) ($input['notifications_comments'] ?? 0),
+            'notifications_mentions' => (bool) ($input['notifications_mentions'] ?? 0),
         ];
 
         $preferences = auth()->user()->preferences ?? [];

@@ -649,6 +649,11 @@
                         @csrf
                         @method('PUT')
 
+                        <!-- Hidden fields to ensure unchecked values are sent as false -->
+                        <input type="hidden" name="notifications_email" value="0">
+                        <input type="hidden" name="notifications_push" value="0">
+                        <input type="hidden" name="notifications_sms" value="0">
+
                         <label class="notification-item">
                             <input type="checkbox" name="notifications_email" value="1" class="notification-checkbox" id="notifEmail" {{ $notifications_email ? 'checked' : '' }}>
                             <span class="notification-content">
@@ -696,6 +701,14 @@
                                 setTimeout(() => {
                                     this.parentElement.style.opacity = '1';
                                 }, 200);
+
+                                // Update the hidden field value
+                                const hiddenField = this.previousElementSibling;
+                                if (this.checked) {
+                                    this.value = '1';
+                                } else {
+                                    this.value = '0';
+                                }
                             });
                         });
                     </script>
