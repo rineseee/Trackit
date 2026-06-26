@@ -546,14 +546,28 @@
                         <p>Customize your experience</p>
                     </div>
 
-                    <form action="{{ route('settings.updatePreferences') }}" method="POST" class="form-grid">
+                    @if (session('success'))
+                        <div class="success-message" style="margin-bottom: 12px; padding: 10px 12px; background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 4px; color: #166534;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="error-message" style="margin-bottom: 12px;">
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <form action="{{ route('settings.updatePreferences') }}" method="POST" class="form-grid" id="preferencesForm">
                         @csrf
                         @method('PUT')
 
                         <div class="preferences-form">
                             <div class="pref-group">
                                 <label class="pref-label">Theme</label>
-                                <select name="theme" class="pref-select">
+                                <select name="theme" class="pref-select" id="themeSelect">
                                     <option value="light" {{ ($user->preferences['theme'] ?? 'light') === 'light' ? 'selected' : '' }}>Light</option>
                                     <option value="dark" {{ ($user->preferences['theme'] ?? 'light') === 'dark' ? 'selected' : '' }}>Dark</option>
                                 </select>
@@ -561,7 +575,7 @@
 
                             <div class="pref-group">
                                 <label class="pref-label">Language</label>
-                                <select name="language" class="pref-select">
+                                <select name="language" class="pref-select" id="languageSelect">
                                     <option value="en" {{ ($user->preferences['language'] ?? 'en') === 'en' ? 'selected' : '' }}>English</option>
                                     <option value="sq" {{ ($user->preferences['language'] ?? 'en') === 'sq' ? 'selected' : '' }}>Shqip</option>
                                     <option value="it" {{ ($user->preferences['language'] ?? 'en') === 'it' ? 'selected' : '' }}>Italiano</option>
@@ -570,7 +584,7 @@
 
                             <div class="pref-group">
                                 <label class="pref-label">Timezone</label>
-                                <select name="timezone" class="pref-select">
+                                <select name="timezone" class="pref-select" id="timezoneSelect">
                                     <option value="Europe/Budapest" {{ ($user->preferences['timezone'] ?? 'Europe/Budapest') === 'Europe/Budapest' ? 'selected' : '' }}>Budapest</option>
                                     <option value="Europe/Tirana" {{ ($user->preferences['timezone'] ?? '') === 'Europe/Tirana' ? 'selected' : '' }}>Tirana</option>
                                     <option value="Europe/Rome" {{ ($user->preferences['timezone'] ?? '') === 'Europe/Rome' ? 'selected' : '' }}>Rome</option>
@@ -580,12 +594,34 @@
                         </div>
 
                         <div class="form-actions" style="grid-column: 1 / -1;">
-                            <button type="submit" class="btn-primary">
+                            <button type="submit" class="btn-primary" id="prefSaveBtn">
                                 <i class="bi bi-check2"></i>
-                                Save
+                                Save Preferences
                             </button>
                         </div>
                     </form>
+
+                    <script>
+                        document.getElementById('preferencesForm').addEventListener('submit', function(e) {
+                            const theme = document.getElementById('themeSelect').value;
+                            if (theme === 'dark') {
+                                document.documentElement.setAttribute('data-theme', 'dark');
+                                localStorage.setItem('theme', 'dark');
+                            } else {
+                                document.documentElement.removeAttribute('data-theme');
+                                localStorage.setItem('theme', 'light');
+                            }
+
+                            const btn = document.getElementById('prefSaveBtn');
+                            btn.disabled = true;
+                            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+                        });
+
+                        const savedTheme = localStorage.getItem('theme') || 'light';
+                        if (savedTheme === 'dark') {
+                            document.documentElement.setAttribute('data-theme', 'dark');
+                        }
+                    </script>
                 </div>
 
                 <!-- NOTIFICATIONS PANEL -->

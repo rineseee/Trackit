@@ -94,15 +94,11 @@ class SettingsController extends Controller
     }
 
     /**
-     * Update preferences
+     * Update preferences with form request validation
      */
-    public function updatePreferences(Request $request)
+    public function updatePreferences(\App\Http\Requests\UpdatePreferencesRequest $request)
     {
-        $validated = $request->validate([
-            'theme' => 'required|in:light,dark',
-            'language' => 'required|in:en,sq,it',
-            'timezone' => 'required|timezone',
-        ]);
+        $validated = $request->validated();
 
         $preferences = auth()->user()->preferences ?? [];
         $preferences = array_merge($preferences, $validated);
@@ -111,7 +107,10 @@ class SettingsController extends Controller
             'preferences' => $preferences,
         ]);
 
-        return back()->with('success', 'Preferences updated successfully!');
+        // Apply theme immediately via session
+        session(['theme' => $validated['theme']]);
+
+        return back()->with('success', '✅ Preferences saved! Theme, language, and timezone updated.');
     }
 
     /**
