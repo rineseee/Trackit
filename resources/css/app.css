@@ -2414,8 +2414,8 @@
     .trackit-sidebar-link {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 12px 12px;
+        gap: 18px;
+        padding: 14px 18px;
         color: var(--trackit-muted);
         text-decoration: none;
         border-radius: var(--trackit-radius);
@@ -2449,9 +2449,10 @@
     }
 
     .trackit-sidebar-link i {
-        font-size: 18px;
-        width: 20px;
+        font-size: 24px;
+        width: 28px;
         text-align: center;
+        flex-shrink: 0;
     }
 
     .trackit-sidebar-section {
