@@ -73,6 +73,8 @@ Route::get('/verify-email/{id}/{hash}', function (Request $request, $id, $hash) 
 Route::middleware('auth')->group(function () {
     Route::get('/issues', [IssueController::class, 'index'])->name('issues.index');
     Route::get('/issues/kanban', [IssueController::class, 'kanban'])->name('issues.kanban');
+    Route::get('/issues/create', [IssueController::class, 'create'])->name('issues.create');
+    Route::get('/issues/{issue}/edit', [IssueController::class, 'edit'])->name('issues.edit');
     Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
 });
 

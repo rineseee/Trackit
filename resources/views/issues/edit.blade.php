@@ -120,16 +120,16 @@
             </div>
 
             <div class="page-banner-meta">
+                @if(isset($issue) && $issue)
                 <div class="meta-tile">
                     <div class="meta-tile-label">Status</div>
-                    <div class="meta-tile-value">{{ ucfirst(str_replace('_', ' ', $issue->status)) }}</div>
-                    <div style="font-size: 12px; color: var(--trackit-muted); margin-top: 4px;">Current</div>
+                    <div class="meta-tile-value">{{ ucfirst(str_replace('_', ' ', $issue->status ?? 'open')) }}</div>
                 </div>
                 <div class="meta-tile">
                     <div class="meta-tile-label">Updated</div>
-                    <div class="meta-tile-value">{{ $issue->updated_at->format('M d') }}</div>
-                    <div style="font-size: 12px; color: var(--trackit-muted); margin-top: 4px;">Recently</div>
+                    <div class="meta-tile-value">{{ $issue->updated_at?->format('M d') ?? 'N/A' }}</div>
                 </div>
+                @endif
             </div>
 
             <div class="page-banner-actions">
@@ -142,5 +142,6 @@
 
         <div class="animate-slide-up" style="animation-delay: 100ms;">
             @include('issues._form', ['issue' => $issue, 'projects' => $projects, 'tags' => $tags])
+        </div>
     </div>
 @endsection
