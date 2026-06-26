@@ -150,9 +150,14 @@ class TeamController extends Controller
 
         $member = User::findOrFail($memberId);
 
-        // Check if current user is authenticated and is admin
-        if (!auth()->check() || !auth()->user()->isAdmin()) {
-            return back()->with('error', 'Unauthorized: Only admins can change roles');
+        // Check if current user is authenticated and is OWNER only
+        if (!auth()->check()) {
+            return back()->with('error', 'Unauthorized: Not authenticated');
+        }
+
+        $currentUser = auth()->user();
+        if ($currentUser->role !== 'owner') {
+            return back()->with('error', 'Unauthorized: Only the owner can change member roles');
         }
 
         // Prevent changing owner role
