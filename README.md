@@ -1,58 +1,232 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Trackit - Issue Tracker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, full-featured issue tracking application built with Laravel and Tailwind CSS. Manage projects, track issues, collaborate with teams, and organize your work efficiently.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Management**: Register, authenticate, and manage user profiles
+- **Team Collaboration**: Create teams, manage team members, and assign roles
+- **Projects**: Organize issues into multiple projects
+- **Issues**: Create, track, and manage issues with detailed information
+- **Comments**: Add discussions and feedback to issues
+- **Tags**: Categorize and filter issues with custom tags
+- **Role-Based Access Control**: Owner, Member roles with specific permissions
+- **Team Member Management**: Invite users, manage roles, and remove members
+- **Responsive Design**: Mobile-friendly interface with Bootstrap 5
+- **Dark/Light Mode**: Theme switching for user preference
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend**: Laravel 13.8, PHP 8.3+
+- **Frontend**: Tailwind CSS 4.3, Vite, Bootstrap 5
+- **Database**: SQLite (configurable)
+- **Testing**: PHPUnit 12.5
+- **Code Quality**: Laravel Pint
 
-## Learning Laravel
+## Requirements
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- PHP 8.3+
+- Composer
+- Node.js 18+
+- npm
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### Quick Setup
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+1. Clone the repository:
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/rineseee/Trackit.git
+cd Trackit
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+2. Run the setup script:
+```bash
+composer run setup
+```
+
+This will:
+- Install PHP dependencies
+- Create `.env` file from `.env.example`
+- Generate application key
+- Run database migrations
+- Install Node dependencies
+- Build frontend assets
+
+### Manual Setup
+
+If you prefer manual setup:
+
+```bash
+# Install PHP dependencies
+composer install
+
+# Copy environment file
+cp .env.example .env
+
+# Generate application key
+php artisan key:generate
+
+# Run database migrations
+php artisan migrate
+
+# Install Node dependencies
+npm install --ignore-scripts
+
+# Build frontend assets
+npm run build
+```
+
+## Development
+
+Start the development server with all watchers:
+
+```bash
+composer run dev
+```
+
+This runs:
+- Laravel development server
+- Queue listener
+- Log tail
+- Vite dev server
+
+Or run them individually:
+
+```bash
+# Terminal 1: Laravel server
+php artisan serve
+
+# Terminal 2: Queue listener
+php artisan queue:listen --tries=1 --timeout=0
+
+# Terminal 3: Logs
+php artisan pail --timeout=0
+
+# Terminal 4: Frontend dev server
+npm run dev
+```
+
+## Building for Production
+
+```bash
+npm run build
+```
+
+## Testing
+
+Run the test suite:
+
+```bash
+composer run test
+```
+
+## Database
+
+The application uses SQLite by default. Database file is created at `database/database.sqlite`.
+
+### Running Migrations
+
+```bash
+php artisan migrate
+```
+
+### Rolling Back Migrations
+
+```bash
+php artisan migrate:rollback
+```
+
+## Project Structure
+
+```
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/    # Request handlers
+│   │   └── Middleware/     # HTTP middleware
+│   ├── Models/             # Database models (User, Project, Issue, etc.)
+│   └── Policies/           # Authorization policies
+├── database/
+│   ├── migrations/         # Database schema migrations
+│   ├── factories/          # Model factories for testing
+│   └── seeders/            # Database seeders
+├── resources/
+│   ├── views/              # Blade templates
+│   ├── css/                # Tailwind CSS
+│   └── js/                 # JavaScript files
+├── routes/                 # Application routes
+└── tests/                  # Test files
+```
+
+## Key Models
+
+- **User**: Application users with authentication
+- **Team**: Group users together for collaboration
+- **Project**: Container for related issues
+- **Issue**: Individual tasks or problems to track
+- **Comment**: Discussions on issues
+- **Tag**: Labels for organizing issues
+
+## API Endpoints
+
+### Authentication
+- `POST /login` - User login
+- `POST /register` - User registration
+- `POST /logout` - User logout
+
+### Projects
+- `GET /projects` - List projects
+- `POST /projects` - Create project
+- `GET /projects/{id}` - View project
+- `PUT /projects/{id}` - Update project
+- `DELETE /projects/{id}` - Delete project
+
+### Issues
+- `GET /issues` - List issues
+- `POST /issues` - Create issue
+- `GET /issues/{id}` - View issue
+- `PUT /issues/{id}` - Update issue
+- `DELETE /issues/{id}` - Delete issue
+
+### Teams
+- `GET /teams` - List teams
+- `POST /teams` - Create team
+- `GET /teams/{id}` - View team
+- `POST /teams/{id}/members` - Add team member
+- `DELETE /teams/{id}/members/{memberId}` - Remove member
+
+## Security
+
+- Password hashing with bcrypt
+- CSRF protection on all state-changing requests
+- Secure password reset functionality
+- Role-based access control (RBAC)
+- SQL injection prevention with prepared statements
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contributions are welcome! Please follow these guidelines:
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-source software licensed under the [MIT license](LICENSE).
+
+## Support
+
+For issues, questions, or suggestions, please:
+- Open an issue on GitHub
+- Contact: rineskraasniqi@gmail.com
+
+## Author
+
+**Rinesa** - [@rineseee](https://github.com/rineseee)
+
+---
+
+**Trackit** - Making issue tracking simple and effective.
