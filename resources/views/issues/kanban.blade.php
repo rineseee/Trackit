@@ -4,6 +4,14 @@
 
 @section('content')
     @php
+        // Calculate metrics from grouped issues
+        $allIssues = $issues->flatten();
+        $totalIssues = $allIssues->count();
+        $openIssues = $issues->get('open', collect())->count();
+        $inProgressIssues = $issues->get('in_progress', collect())->count();
+        $closedIssues = $issues->get('closed', collect())->count();
+        $statuses = ['open', 'in_progress', 'closed'];
+
         $statusClass = function($status) {
             return match($status) {
                 'open' => 'kanban-status-open',
@@ -495,7 +503,7 @@
         <div class="board-container">
             @foreach ($statuses as $status)
                 @php
-                    $columnIssues = collect(data_get($issuesByStatus, $status, []));
+                    $columnIssues = $issues->get($status, collect());
                     $columnCount = $columnIssues->count();
                     $columnTitle = match($status) {
                         'open' => 'Open',
