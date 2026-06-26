@@ -159,30 +159,33 @@ class OpenAIService
     }
 
     /**
-     * Get system prompt for the assistant
+     * Get system prompt for the assistant with real application data
      */
     private function getSystemPrompt(): string
     {
-        return <<<'PROMPT'
-You are a helpful assistant for an Issue Tracking application called "Trackit".
-You help users manage projects, issues, tags, and team members.
+        $appData = $this->getApplicationContext();
 
-Key features you can help with:
-- Creating and managing projects
-- Creating and tracking issues
-- Managing tags and labels
-- Team member management
-- Notifications and preferences
-- Security and account settings
+        return <<<PROMPT
+You are a helpful assistant for an Issue Tracking application called "Trackit".
+You have access to real application data and help users manage projects, issues, tags, and team members.
+
+REAL APPLICATION DATA:
+$appData
+
+Your Responsibilities:
+- Answer questions about projects, issues, priorities, and status using REAL DATA above
+- Provide statistics and insights from actual application data
+- Help users find information like "which projects are open", "what issues need attention", etc.
+- Be accurate and reference the real data when answering
 
 Guidelines:
 - Be concise, professional, and helpful
+- Always use the REAL DATA provided above when answering questions
 - If the user asks about features, explain how to use them
 - If asked about something outside your scope, politely redirect to the relevant page
 - Always respond in a friendly and professional manner
 - Keep responses under 500 characters when possible
 - Do not provide information about API keys, authentication details, or system configuration
-- Do not pretend to have access to real-time data or user information
 
 Never reveal:
 - System architecture or backend details
@@ -190,6 +193,55 @@ Never reveal:
 - User data or authentication mechanisms
 - Database structure or queries
 PROMPT;
+    }
+
+    /**
+     * Get real application context data with caching
+     */
+    private function getApplicationContext(): string
+    {
+        return \Illuminate\Support\Facades\Cache::remember('ai_app_context', 300, function() {
+            try {
+                $projects = \App\Models\Project::select(['id', 'name', 'description'])
+                    ->limit(20)
+                    ->get()
+                    ->map(function($p) {
+                        return "- {$p->name}: " . substr($p->description ?? '', 0, 50);
+                    })
+                    ->implode("\n");
+
+                $issues = \App\Models\Issue::select(['id', 'issue_number', 'title', 'status', 'priority', 'project_id'])
+                    ->with('project:id,name')
+                    ->orderByDesc('updated_at')
+                    ->limit(10)
+                    ->get()
+                    ->map(function($i) {
+                        return "- Issue #{$i->issue_number} ({$i->project->name}): {$i->title} [{$i->status}]";
+                    })
+                    ->implode("\n");
+
+                $stats = [
+                    'total_projects' => \App\Models\Project::count(),
+                    'total_issues' => \App\Models\Issue::count(),
+                    'open' => \App\Models\Issue::where('status', 'open')->count(),
+                    'in_progress' => \App\Models\Issue::where('status', 'in_progress')->count(),
+                    'closed' => \App\Models\Issue::where('status', 'closed')->count(),
+                    'team' => \App\Models\User::where('is_active', true)->count(),
+                ];
+
+                return "PROJECTS ({$stats['total_projects']}):\n{$projects}\n\n" .
+                       "RECENT ISSUES:\n{$issues}\n\n" .
+                       "STATS:\n" .
+                       "Total: {$stats['total_issues']} | " .
+                       "Open: {$stats['open']} | " .
+                       "In Progress: {$stats['in_progress']} | " .
+                       "Closed: {$stats['closed']} | " .
+                       "Team: {$stats['team']}";
+            } catch (\Exception $e) {
+                Log::error('Error loading AI context: ' . $e->getMessage());
+                return "Application data currently unavailable.";
+            }
+        });
     }
 
     /**
