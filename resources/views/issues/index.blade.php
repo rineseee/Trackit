@@ -300,6 +300,46 @@
             color: #4f46e5;
         }
 
+        .tags-cell {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .tag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            background: var(--trackit-surface-soft);
+            border: 1px solid var(--trackit-border);
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--trackit-text);
+            white-space: nowrap;
+            transition: all 150ms ease;
+        }
+
+        .tag-badge:hover {
+            border-color: var(--trackit-primary);
+            background: var(--trackit-surface);
+            box-shadow: 0 2px 6px rgba(79, 70, 229, 0.1);
+        }
+
+        .tag-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
+
+        .tag-badge-empty {
+            font-size: 11px;
+            color: var(--trackit-faint);
+        }
+
         .actions-cell {
             display: flex;
             gap: 6px;
@@ -496,6 +536,15 @@
             @endforeach
         </select>
 
+        <select name="tag" aria-label="Filter by tag" onchange="this.form.submit()">
+            <option value="">All tags</option>
+            @foreach ($tags as $tag)
+                <option value="{{ $tag->id }}" @selected(request('tag') == $tag->id)>
+                    {{ $tag->name }}
+                </option>
+            @endforeach
+        </select>
+
         <button type="submit" class="ui-button secondary" style="white-space: nowrap;">
             <i class="bi bi-funnel"></i>
             Apply
@@ -521,12 +570,13 @@
                 <table class="ui-table">
                     <thead>
                         <tr>
-                            <th style="width: 35%;">Issue</th>
-                            <th style="width: 15%;">Project</th>
-                            <th style="width: 12%;">Status</th>
-                            <th style="width: 12%;">Priority</th>
-                            <th style="width: 12%;">Due</th>
-                            <th style="width: 14%; text-align: right;">Actions</th>
+                            <th style="width: 28%;">Issue</th>
+                            <th style="width: 13%;">Project</th>
+                            <th style="width: 11%;">Status</th>
+                            <th style="width: 11%;">Priority</th>
+                            <th style="width: 10%;">Due</th>
+                            <th style="width: 15%;">Tags</th>
+                            <th style="width: 12%; text-align: right;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -558,6 +608,18 @@
                                     @else
                                         <span style="font-size: 12px; color: var(--trackit-faint);">—</span>
                                     @endif
+                                </td>
+                                <td>
+                                    <div class="tags-cell">
+                                        @forelse($issue->tags as $tag)
+                                            <span class="tag-badge" title="{{ $tag->name }}">
+                                                <span class="tag-badge-dot" style="background-color: {{ $tag->color ?? '#6366f1' }};"></span>
+                                                {{ \Illuminate\Support\Str::limit($tag->name, 12) }}
+                                            </span>
+                                        @empty
+                                            <span class="tag-badge-empty">—</span>
+                                        @endforelse
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="actions-cell" onclick="event.stopPropagation();">
