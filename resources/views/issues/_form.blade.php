@@ -87,17 +87,20 @@
 
             <div class="form-group">
                 <label class="form-label">Tags</label>
-                <select
-                    name="tags[]"
-                    multiple
-                    size="4"
-                    class="form-select">
+                <div class="tags-selector">
                     @foreach ($tags as $tag)
-                        <option value="{{ $tag->id }}" @selected(in_array($tag->id, $selectedTags, true))>
-                            {{ $tag->name }}
-                        </option>
+                        <label class="tag-checkbox">
+                            <input
+                                type="checkbox"
+                                name="tags[]"
+                                value="{{ $tag->id }}"
+                                @checked(in_array($tag->id, $selectedTags, true))
+                                class="tag-checkbox-input">
+                            <span class="tag-checkbox-visual" style="background-color: {{ $tag->color ?? '#6366f1' }}"></span>
+                            <span class="tag-checkbox-label">{{ $tag->name }}</span>
+                        </label>
                     @endforeach
-                </select>
+                </div>
             </div>
         </div>
 

@@ -153,6 +153,89 @@
             font-style: italic;
         }
 
+        .tags-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 8px;
+            background: var(--trackit-surface-soft);
+            border: 1px solid var(--trackit-border);
+            border-radius: 6px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .tag-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 150ms ease;
+            user-select: none;
+        }
+
+        .tag-checkbox:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .tag-checkbox-input {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid var(--trackit-border);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 150ms ease;
+            background: var(--trackit-surface);
+            flex-shrink: 0;
+        }
+
+        .tag-checkbox-input:checked {
+            border-color: var(--trackit-primary);
+            background: var(--trackit-primary);
+        }
+
+        .tag-checkbox-input:checked::after {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .tag-checkbox-visual {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            opacity: 0.8;
+        }
+
+        .tag-checkbox-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--trackit-text);
+            flex: 1;
+        }
+
+        html[data-theme='dark'] .tags-selector {
+            background: var(--trackit-surface-soft);
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        html[data-theme='dark'] .tag-checkbox-input {
+            background: var(--trackit-surface);
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        html[data-theme='dark'] .tag-checkbox:hover {
+            background: rgba(99, 102, 241, 0.15);
+        }
+
         .form-actions {
             display: flex;
             gap: 8px;
