@@ -364,6 +364,42 @@
         html[data-theme='dark'] .danger-form {
             border-color: rgba(148, 163, 184, 0.2);
         }
+
+        html[data-theme='dark'] .btn-primary {
+            background: var(--trackit-primary);
+            color: #ffffff;
+        }
+
+        html[data-theme='dark'] .btn-primary:hover {
+            background: #1d4ed8;
+            opacity: 1;
+        }
+
+        html[data-theme='dark'] .btn-danger {
+            background: #ef4444;
+            color: #ffffff;
+        }
+
+        html[data-theme='dark'] .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        html[data-theme='dark'] .danger-panel {
+            background: #7f1d1d;
+            border-color: #991b1b;
+        }
+
+        html[data-theme='dark'] .danger-header h2 {
+            color: #fca5a5;
+        }
+
+        html[data-theme='dark'] .danger-header p {
+            color: #fca5a5;
+        }
+
+        html[data-theme='dark'] .danger-label {
+            color: #fca5a5;
+        }
     </style>
 
     <div class="settings-wrapper">
