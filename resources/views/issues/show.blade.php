@@ -286,6 +286,88 @@
                 position: static;
             }
         }
+
+        /* Dark mode support */
+        html[data-theme='dark'] .issue-detail-shell {
+            --surface: #1e293b;
+            --surface-soft: #0f172a;
+            --line: #334155;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --brand: #2563eb;
+            --brand-2: #0ea5e9;
+            --shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        html[data-theme='dark'] .text-dark {
+            color: #f1f5f9 !important;
+        }
+
+        html[data-theme='dark'] .text-secondary {
+            color: #94a3b8 !important;
+        }
+
+        html[data-theme='dark'] .bg-light {
+            background-color: #0f172a !important;
+        }
+
+        html[data-theme='dark'] .border {
+            border-color: #334155 !important;
+        }
+
+        html[data-theme='dark'] .form-control {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            border-color: #334155;
+        }
+
+        html[data-theme='dark'] .form-control:focus {
+            background-color: #0f172a;
+            color: #f1f5f9;
+            border-color: #2563eb;
+        }
+
+        html[data-theme='dark'] .btn-outline-primary {
+            color: #2563eb;
+            border-color: #2563eb;
+        }
+
+        html[data-theme='dark'] .btn-outline-primary:hover {
+            background-color: #2563eb;
+            color: #fff;
+        }
+
+        html[data-theme='dark'] .btn-outline-secondary {
+            color: #94a3b8;
+            border-color: #334155;
+        }
+
+        html[data-theme='dark'] .btn-outline-secondary:hover {
+            background-color: #334155;
+            color: #f1f5f9;
+        }
+
+        html[data-theme='dark'] .btn-outline-danger {
+            color: #ef4444;
+            border-color: #ef4444;
+        }
+
+        html[data-theme='dark'] .btn-outline-danger:hover {
+            background-color: #ef4444;
+            color: #fff;
+        }
+
+        html[data-theme='dark'] .modal-content {
+            background: #1e293b;
+        }
+
+        html[data-theme='dark'] .modal-header {
+            border-bottom-color: #334155 !important;
+        }
+
+        html[data-theme='dark'] .modal-footer {
+            border-top-color: #334155 !important;
+        }
     </style>
 @endpush
 
@@ -357,10 +439,6 @@
                     </div>
 
                     <h1 class="hero-title display-6 mb-2">{{ $issue->title }}</h1>
-                    <p class="text-secondary mb-0">
-                        A Jira-style workspace for tracking the issue, keeping comments organized, and managing tags and
-                        members without leaving the page.
-                    </p>
                 </div>
 
                 @auth
