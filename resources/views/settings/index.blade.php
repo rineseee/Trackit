@@ -7,17 +7,17 @@
         .settings-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 8px;
         }
 
         .settings-header {
-            padding-bottom: 12px;
+            padding-bottom: 6px;
             border-bottom: 1px solid var(--trackit-border);
         }
 
         .settings-header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             color: var(--trackit-text);
         }
@@ -25,44 +25,44 @@
         .settings-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 8px;
         }
 
         .settings-panel {
             background: var(--trackit-surface);
             border: 1px solid var(--trackit-border);
-            border-radius: 10px;
-            padding: 16px;
+            border-radius: 8px;
+            padding: 10px;
         }
 
         .panel-header {
-            margin-bottom: 12px;
-            padding-bottom: 12px;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--trackit-border);
         }
 
         .panel-header h2 {
-            margin: 0 0 2px;
-            font-size: 15px;
+            margin: 0 0 1px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--trackit-text);
         }
 
         .panel-header p {
             margin: 0;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--trackit-muted);
         }
 
         .form-grid {
             display: grid;
-            gap: 10px;
+            gap: 6px;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 6px;
         }
 
         .form-col-full {
@@ -84,12 +84,12 @@
         .form-input,
         .form-select,
         .form-textarea {
-            padding: 8px 10px;
+            padding: 6px 8px;
             border: 1px solid var(--trackit-border);
             background: var(--trackit-surface-soft);
             color: var(--trackit-text);
-            border-radius: 6px;
-            font-size: 12px;
+            border-radius: 4px;
+            font-size: 11px;
             transition: all 150ms ease;
             font-family: inherit;
         }
@@ -109,9 +109,9 @@
 
         .form-actions {
             display: flex;
-            gap: 8px;
-            margin-top: 10px;
-            padding-top: 10px;
+            gap: 6px;
+            margin-top: 6px;
+            padding-top: 6px;
             border-top: 1px solid var(--trackit-border);
         }
 
@@ -119,13 +119,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            padding: 10px 16px;
+            gap: 4px;
+            padding: 6px 12px;
             background: var(--trackit-primary);
             color: white !important;
             border: none;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             transition: all 150ms ease;
@@ -229,10 +229,10 @@
         .danger-panel {
             background: #fef2f2;
             border: 1px solid #fca5a5;
-            border-radius: 10px;
-            padding: 16px;
+            border-radius: 8px;
+            padding: 10px;
             grid-column: 1 / -1;
-            margin-top: 8px;
+            margin-top: 4px;
         }
 
         .danger-header h2 {
@@ -251,9 +251,9 @@
         .danger-form {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-top: 12px;
-            padding-top: 12px;
+            gap: 6px;
+            margin-top: 6px;
+            padding-top: 6px;
             border-top: 1px solid #fca5a5;
         }
 
@@ -286,13 +286,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            padding: 10px 16px;
+            gap: 4px;
+            padding: 6px 12px;
             background: #dc2626;
             color: white !important;
             border: none;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             transition: all 150ms ease;
