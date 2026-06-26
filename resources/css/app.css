@@ -2401,100 +2401,193 @@
     }
 
     /* ============================================================================
-       SIDEBAR MODERN REDESIGN
+       SIDEBAR - PREMIUM SAAS REDESIGN
        ============================================================================ */
 
     .trackit-sidebar {
         background: var(--trackit-surface);
         border-right: 1px solid var(--trackit-border);
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     .trackit-sidebar-brand {
         display: flex;
         align-items: center;
-        gap: 12px;
-        padding: 16px 20px;
-        margin-bottom: 24px;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 16px;
+        margin: 0 8px 20px;
+        background: linear-gradient(135deg, var(--trackit-primary-soft) 0%, rgba(0, 0, 0, 0.02) 100%);
+        border: 1px solid var(--trackit-border);
+        border-radius: 10px;
         color: var(--trackit-primary);
-        font-size: 18px;
-        font-weight: 700;
+        font-size: 16px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
         text-decoration: none;
-        border-bottom: 2px solid var(--trackit-border);
-        transition: all 200ms ease;
+        transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .trackit-sidebar-brand::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        opacity: 0;
+        transition: opacity 250ms ease;
     }
 
     .trackit-sidebar-brand:hover {
-        color: var(--trackit-primary-hover);
+        border-color: var(--trackit-primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .trackit-sidebar-brand:hover::before {
+        opacity: 1;
     }
 
     .trackit-sidebar-brand i {
-        font-size: 24px;
+        font-size: 22px;
+        transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .trackit-sidebar-brand:hover i {
+        transform: scale(1.1) rotate(5deg);
     }
 
     .trackit-sidebar-nav {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        padding: 0 12px;
+        gap: 4px;
+        padding: 0 8px;
+        flex: 1;
     }
 
     .trackit-sidebar-link {
         display: flex;
         align-items: center;
-        gap: 18px;
-        padding: 14px 18px;
+        gap: 12px;
+        padding: 12px 12px;
         color: var(--trackit-muted);
         text-decoration: none;
-        border-radius: var(--trackit-radius);
+        border-radius: 8px;
         font-weight: 500;
-        font-size: 14px;
-        transition: all 200ms ease;
+        font-size: 13px;
+        transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
+        overflow: hidden;
+    }
+
+    .trackit-sidebar-link::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--trackit-primary);
+        border-radius: 0 3px 3px 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .trackit-sidebar-link:hover {
         background: var(--trackit-surface-soft);
         color: var(--trackit-text);
+        padding-left: 16px;
+    }
+
+    .trackit-sidebar-link:hover i {
+        transform: translateX(2px);
     }
 
     .trackit-sidebar-link.active {
-        background: var(--trackit-primary-soft);
+        background: linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0%, transparent 100%);
         color: var(--trackit-primary);
         font-weight: 700;
     }
 
     .trackit-sidebar-link.active::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 4px;
-        height: 24px;
-        background: var(--trackit-primary);
-        border-radius: 0 2px 2px 0;
+        transform: scaleY(1);
     }
 
     .trackit-sidebar-link i {
-        font-size: 24px;
-        width: 28px;
+        font-size: 18px;
+        width: 24px;
         text-align: center;
         flex-shrink: 0;
+        transition: transform 200ms ease;
+    }
+
+    .trackit-sidebar-link .label {
+        transition: all 200ms ease;
     }
 
     .trackit-sidebar-section {
-        margin-top: 24px;
-        padding-top: 16px;
-        border-top: 1px solid var(--trackit-border);
+        margin-top: 16px;
+        padding-top: 12px;
+        padding-bottom: 4px;
+    }
+
+    .trackit-sidebar-section:first-of-type {
+        margin-top: 0;
     }
 
     .trackit-sidebar-section-title {
-        padding: 0 20px 12px;
+        padding: 8px 16px;
+        margin-bottom: 6px;
         color: var(--trackit-faint);
-        font-size: 11px;
-        font-weight: 700;
+        font-size: 10px;
+        font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.1em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .trackit-sidebar-section-title::before {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--trackit-border), transparent);
+    }
+
+    /* ============================================================================
+       SIDEBAR - DARK MODE
+       ============================================================================ */
+
+    html[data-theme='dark'] .trackit-sidebar {
+        background: var(--trackit-surface);
+        border-right-color: rgba(148, 163, 184, 0.2);
+    }
+
+    html[data-theme='dark'] .trackit-sidebar-brand {
+        background: linear-gradient(135deg, rgba(0, 100, 200, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+        border-color: rgba(148, 163, 184, 0.2);
+    }
+
+    html[data-theme='dark'] .trackit-sidebar-brand:hover {
+        border-color: var(--trackit-primary);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    html[data-theme='dark'] .trackit-sidebar-link:hover {
+        background: var(--trackit-surface-soft);
+        color: var(--trackit-text);
+    }
+
+    html[data-theme='dark'] .trackit-sidebar-link.active {
+        background: linear-gradient(90deg, rgba(100, 150, 255, 0.1) 0%, transparent 100%);
+    }
+
+    html[data-theme='dark'] .trackit-sidebar-section-title::before {
+        background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.3), transparent);
     }
 
     /* ============================================================================
