@@ -14,10 +14,10 @@
     :root {
         color-scheme: light;
 
-        /* PRIMARY ACCENT - MODERN BLACK */
-        --trackit-primary: #000000;
-        --trackit-primary-soft: #f3f4f6;
-        --trackit-primary-hover: #1f2937;
+        /* PRIMARY ACCENT - MODERN BLUE */
+        --trackit-primary: #3b82f6;
+        --trackit-primary-soft: #eff6ff;
+        --trackit-primary-hover: #2563eb;
         --trackit-primary-light: #f9fafb;
 
         /* BACKGROUNDS & SURFACES */
@@ -2008,8 +2008,8 @@
     }
 
     .ui-button.secondary {
-        background: #000000;
-        border-color: #000000;
+        background: #3b82f6;
+        border-color: #3b82f6;
         color: #ffffff !important;
     }
 
@@ -2635,11 +2635,11 @@
        ============================================================================ */
 
     .dashboard-header-right .btn.btn-primary i.bi-plus-lg {
-        color: black !important;
+        color: white !important;
     }
 
     html[data-theme='dark'] .dashboard-header-right .btn.btn-primary i.bi-plus-lg {
-        color: black !important;
+        color: white !important;
     }
 
     /* ============================================================================
