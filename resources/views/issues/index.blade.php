@@ -346,21 +346,6 @@
             color: var(--trackit-text);
         }
 
-        .issues-header-actions .ui-button.primary {
-            color: #ffffff;
-        }
-
-        html[data-theme='dark'] .issues-header-actions .ui-button.primary {
-            color: #ffffff !important;
-            background-color: var(--trackit-primary);
-            border-color: var(--trackit-primary);
-        }
-
-        html[data-theme='dark'] .issues-header-actions .ui-button.primary:hover {
-            background-color: #1d4ed8;
-            border-color: #1d4ed8;
-        }
-
         .empty-state p {
             margin: 0 0 16px;
             font-size: 13px;
