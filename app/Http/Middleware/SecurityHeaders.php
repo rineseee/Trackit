@@ -31,16 +31,8 @@ class SecurityHeaders
             $response->header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
         }
 
-        // Content Security Policy
-        $response->header('Content-Security-Policy', "
-            default-src 'self';
-            script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
-            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net;
-            img-src 'self' data: https:;
-            font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;
-            connect-src 'self';
-            frame-ancestors 'self';
-        ");
+        // Content Security Policy (no newlines - must be single line)
+        $response->header('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src 'self'; frame-ancestors 'self';");
 
         return $response;
     }
