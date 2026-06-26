@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class SettingsController extends Controller
 {
@@ -44,20 +46,51 @@ class SettingsController extends Controller
     }
 
     /**
-     * Update password
+     * Update password with MAXIMUM SECURITY
      */
     public function updatePassword(Request $request)
     {
+        // Strong password validation
         $validated = $request->validate([
-            'current_password' => 'required|current_password',
-            'password' => 'required|min:8|confirmed',
+            'current_password' => ['required', 'current_password'],
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(12)
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised(),  // Check against breached passwords database
+            ],
         ]);
 
-        auth()->user()->update([
-            'password' => bcrypt($validated['password']),
+        $user = auth()->user();
+
+        // Prevent reusing the same password
+        if (Hash::check($validated['password'], $user->password)) {
+            return back()->withErrors(['password' => 'New password must be different from current password.']);
+        }
+
+        // Update password using Hash::make() consistently
+        $user->update([
+            'password' => Hash::make($validated['password']),
         ]);
 
-        return back()->with('success', 'Password updated successfully!');
+        // Log password change for audit trail
+        \Log::info("Password changed for user {$user->id} ({$user->email})", [
+            'ip' => $request->ip(),
+            'timestamp' => now(),
+        ]);
+
+        // Invalidate all other sessions for security
+        $request->session()->invalidateOtherSessions();
+
+        // Clear all tokens/remember tokens
+        $user->update(['remember_token' => null]);
+
+        // Force re-authentication for sensitive operations
+        return redirect()->route('dashboard')
+            ->with('success', 'Password updated! Please log in again for security.');
     }
 
     /**

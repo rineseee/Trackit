@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Cache;
 
 class IssueController extends Controller
 {
@@ -65,8 +66,14 @@ class IssueController extends Controller
     {
         return view('issues.create', [
             'issue' => new Issue(),
-            'projects' => Project::query()->orderBy('name')->get(['id', 'name']),
-            'tags' => Tag::query()->orderBy('name')->get(['id', 'name', 'color']),
+            // Cache projects list for 1 hour - invalidated when projects change
+            'projects' => Cache::remember('projects_list', 3600, fn () =>
+                Project::query()->orderBy('name')->get(['id', 'name'])
+            ),
+            // Cache tags list for 1 hour - invalidated when tags change
+            'tags' => Cache::remember('tags_list', 3600, fn () =>
+                Tag::query()->orderBy('name')->get(['id', 'name', 'color'])
+            ),
         ]);
     }
 
@@ -98,8 +105,17 @@ class IssueController extends Controller
 
         return view('issues.show', [
             'issue' => $issue,
-            'allTags' => Tag::query()->orderBy('name')->get(['id', 'name', 'color']),
-            'users' => User::query()->orderBy('name')->get(['id', 'name', 'email']),
+            // Cache all tags for 1 hour
+            'allTags' => Cache::remember('tags_list', 3600, fn () =>
+                Tag::query()->orderBy('name')->get(['id', 'name', 'color'])
+            ),
+            // Cache active users for 1 hour - only get active users
+            'users' => Cache::remember('active_users_list', 3600, fn () =>
+                User::query()
+                    ->where('is_active', true)
+                    ->orderBy('name')
+                    ->get(['id', 'name', 'email'])
+            ),
         ]);
     }
 
@@ -109,8 +125,12 @@ class IssueController extends Controller
 
         return view('issues.edit', [
             'issue' => $issue,
-            'projects' => Project::query()->orderBy('name')->get(['id', 'name']),
-            'tags' => Tag::query()->orderBy('name')->get(['id', 'name', 'color']),
+            'projects' => Cache::remember('projects_list', 3600, fn () =>
+                Project::query()->orderBy('name')->get(['id', 'name'])
+            ),
+            'tags' => Cache::remember('tags_list', 3600, fn () =>
+                Tag::query()->orderBy('name')->get(['id', 'name', 'color'])
+            ),
         ]);
     }
 

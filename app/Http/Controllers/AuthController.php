@@ -23,27 +23,64 @@ class AuthController extends Controller
             'password' => ['required', 'min:8'],
         ]);
 
-        $user = User::where('email', $credentials['email'])->first();
+        // Sanitize email
+        $email = strtolower(trim($credentials['email']));
 
+        // Find user
+        $user = User::where('email', $email)->first();
+
+        // Check if account exists and credentials match
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
+            // Increment failed attempts if user exists
+            if ($user) {
+                $attempts = $user->failed_login_attempts + 1;
+                $user->update(['failed_login_attempts' => $attempts]);
+
+                // Log failed attempt
+                \Log::warning("Failed login attempt for user {$user->email}", [
+                    'ip' => $request->ip(),
+                    'attempt' => $attempts,
+                    'timestamp' => now(),
+                ]);
+
+                // Lock after 5 attempts
+                if ($attempts >= 5) {
+                    \Log::critical("Account {$user->email} locked after {$attempts} failed attempts");
+                }
+            }
+
+            // Generic error to prevent user enumeration
             return back()->withErrors(['email' => 'Invalid credentials.'])->onlyInput('email');
         }
 
+        // Check account is active
         if (!$user->is_active) {
+            \Log::warning("Login attempt on inactive account {$user->email}");
             return back()->withErrors(['email' => 'Account deactivated. Contact support.']);
         }
 
+        // Check account is not locked
         if ($user->failed_login_attempts >= 5) {
-            return back()->withErrors(['email' => 'Account locked. Reset your password.'])->onlyInput('email');
+            \Log::warning("Login attempt on locked account {$user->email}");
+            return back()->withErrors(['email' => 'Account locked due to too many failed attempts. Please reset your password.'])->onlyInput('email');
         }
 
+        // Update successful login
         $user->update([
             'last_login_at' => now(),
             'last_login_ip' => $request->ip(),
-            'failed_login_attempts' => 0,
+            'failed_login_attempts' => 0,  // Reset failed attempts
         ]);
 
+        \Log::info("Successful login for user {$user->email}", [
+            'ip' => $request->ip(),
+            'timestamp' => now(),
+        ]);
+
+        // Login user with remember me option
         Auth::login($user, $request->boolean('remember'));
+
+        // CRITICAL: Regenerate session to prevent session fixation
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard'))->with('status', 'Welcome!');

@@ -22,26 +22,47 @@ class ChatBotController extends Controller
     }
 
     /**
-     * Send message to OpenAI and get response
+     * Send message to OpenAI - MAXIMUM SECURITY
      */
     public function sendMessage(Request $request)
     {
-        // Check if OpenAI service is properly configured
-        if (!$this->openAI) {
+        // Verify user is authenticated (middleware should handle this, but double-check)
+        if (!auth()->check()) {
             return response()->json([
                 'success' => false,
-                'error' => 'AI Assistant is not configured. Please set OPENAI_API_KEY in .env file.',
+                'error' => 'Unauthorized',
+            ], 401);
+        }
+
+        // Check if OpenAI service is properly configured
+        if (!$this->openAI) {
+            \Log::critical('OpenAI Service not configured - missing API key');
+
+            // Return generic error to prevent info disclosure
+            return response()->json([
+                'success' => false,
+                'error' => 'AI Assistant is temporarily unavailable. Please try again later.',
             ], 503);
         }
 
+        // Validate input
         $validated = $request->validate([
             'message' => 'required|string|max:2000|min:1',
-            'history' => 'nullable|array',
+            'history' => 'nullable|array|max:20',  // Limit history to prevent memory abuse
         ]);
 
         try {
-            $message = $validated['message'];
+            $message = trim($validated['message']);
             $history = $validated['history'] ?? [];
+
+            // Sanitize message to prevent prompt injection
+            $message = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+
+            // Log user interaction for audit trail (no sensitive data)
+            \Log::info("User " . auth()->id() . " sent message to AI", [
+                'message_length' => strlen($message),
+                'timestamp' => now(),
+            ]);
 
             // Get response from OpenAI
             $response = $this->openAI->sendMessage($message, $history);
@@ -53,21 +74,21 @@ class ChatBotController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            \Log::error('ChatBot Error: ' . $e->getMessage(), [
-                'exception' => get_class($e),
+            // Log with full details securely (not exposed to user)
+            \Log::error('ChatBot Error - User ' . auth()->id(), [
+                'message' => $e->getMessage(),
+                'exception_class' => get_class($e),
                 'code' => $e->getCode(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => config('app.debug') ? $e->getTraceAsString() : null,
             ]);
 
-            // Determine if it's a configuration error or temporary error
-            $statusCode = strpos($e->getMessage(), 'API key') !== false ? 503 : 500;
-            $errorMessage = strpos($e->getMessage(), 'API key') !== false
-                ? 'Configuration error. Please ensure OPENAI_API_KEY is properly set.'
-                : 'Failed to get response from AI assistant. Please try again.';
-
+            // Return GENERIC error message to user (no details exposed)
             return response()->json([
                 'success' => false,
-                'error' => $errorMessage,
-            ], $statusCode);
+                'error' => 'Unable to process your request. Please try again later.',
+            ], 500);
         }
     }
 

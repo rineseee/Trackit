@@ -28,17 +28,25 @@ Route::middleware('guest')->group(function () {
 
     // Login
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.store');
+    Route::post('/login', [AuthController::class, 'login'])
+        ->middleware('throttle:5,1')  // 5 attempts per minute
+        ->name('login.store');
 
     // Register
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+    Route::post('/register', [AuthController::class, 'register'])
+        ->middleware('throttle:3,1')  // 3 attempts per minute
+        ->name('register.store');
 
     // Password Reset
     Route::get('/forgot-password', [PasswordResetController::class, 'showForgotForm'])->name('password.request');
-    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])
+        ->middleware('throttle:3,1')  // 3 attempts per minute
+        ->name('password.email');
     Route::get('/reset-password/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
-    Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])->name('password.update');
+    Route::post('/reset-password', [PasswordResetController::class, 'resetPassword'])
+        ->middleware('throttle:5,1')  // 5 attempts per minute
+        ->name('password.update');
 });
 
 // ============================================================================
@@ -59,15 +67,24 @@ Route::get('/verify-email/{id}/{hash}', function (Request $request, $id, $hash) 
 // ============================================================================
 // PUBLIC APPLICATION ROUTES (READ-ONLY)
 // ============================================================================
-Route::get('/issues', [IssueController::class, 'index'])->name('issues.index');
-Route::get('/issues/kanban', [IssueController::class, 'kanban'])->name('issues.kanban');
+// ============================================================================
+// PROTECTED ROUTES (AUTHENTICATED USERS ONLY) - PUBLIC READ-ONLY ENDPOINTS
+// ============================================================================
+Route::middleware('auth')->group(function () {
+    Route::get('/issues', [IssueController::class, 'index'])->name('issues.index');
+    Route::get('/issues/kanban', [IssueController::class, 'kanban'])->name('issues.kanban');
+    Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
+});
 
-Route::post('/chatbot/send', [\App\Http\Controllers\ChatBotController::class, 'sendMessage'])
-    ->middleware('throttle:30,1')
-    ->name('chatbot.sendMessage');
-Route::post('/chatbot/clear', [\App\Http\Controllers\ChatBotController::class, 'clearHistory'])
-    ->middleware('throttle:30,1')
-    ->name('chatbot.clearHistory');
+// ============================================================================
+// AI CHATBOT ENDPOINTS (AUTHENTICATED + RATE LIMITED)
+// ============================================================================
+Route::middleware(['auth', 'throttle:30,1'])->group(function () {
+    Route::post('/chatbot/send', [\App\Http\Controllers\ChatBotController::class, 'sendMessage'])
+        ->name('chatbot.sendMessage');
+    Route::post('/chatbot/clear', [\App\Http\Controllers\ChatBotController::class, 'clearHistory'])
+        ->name('chatbot.clearHistory');
+});
 
 // ============================================================================
 // PROTECTED ROUTES (AUTHENTICATED USERS ONLY)
@@ -151,8 +168,6 @@ Route::middleware('auth')->group(function () {
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
-
-Route::get('/issues/{issue}', [IssueController::class, 'show'])->name('issues.show');
 
 // ============================================================================
 // FALLBACK - Redirect Any Unauthorized Access to Login

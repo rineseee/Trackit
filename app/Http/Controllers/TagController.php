@@ -47,4 +47,40 @@ class TagController extends Controller
             ->route('tags.index')
             ->with('status', 'Tag created successfully.');
     }
+
+    public function edit(Tag $tag): View
+    {
+        return view('tags.edit', compact('tag'));
+    }
+
+    public function update(StoreTagRequest $request, Tag $tag): RedirectResponse|JsonResponse
+    {
+        $tag->update($request->validated());
+
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tag updated successfully.',
+                'tag' => [
+                    'id' => $tag->id,
+                    'name' => $tag->name,
+                    'color' => $tag->color,
+                ],
+            ]);
+        }
+
+        return redirect()
+            ->route('tags.index')
+            ->with('status', 'Tag updated successfully.');
+    }
+
+    public function destroy(Tag $tag): RedirectResponse
+    {
+        $tagName = $tag->name;
+        $tag->delete();
+
+        return redirect()
+            ->route('tags.index')
+            ->with('status', "Tag '{$tagName}' deleted successfully.");
+    }
 }
