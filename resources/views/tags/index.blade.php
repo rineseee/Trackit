@@ -43,6 +43,17 @@
             font-size: 13px;
         }
 
+        html[data-theme='dark'] .tags-header-actions .ui-button.primary {
+            color: #ffffff;
+            background-color: var(--trackit-primary);
+            border-color: var(--trackit-primary);
+        }
+
+        html[data-theme='dark'] .tags-header-actions .ui-button.primary:hover {
+            background-color: #1d4ed8;
+            border-color: #1d4ed8;
+        }
+
         .tags-metrics {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
@@ -499,12 +510,17 @@
         <div class="tags-header">
             <h1>Tags</h1>
             <div class="tags-header-actions">
-                @guest
+                @auth
+                    <button class="ui-button primary" onclick="document.getElementById('scrollToForm').scrollIntoView({behavior: 'smooth'})">
+                        <i class="bi bi-plus-lg"></i>
+                        New Tag
+                    </button>
+                @else
                     <a href="{{ route('login') }}" class="ui-button primary">
                         <i class="bi bi-box-arrow-in-right"></i>
                         Log In
                     </a>
-                @endguest
+                @endauth
             </div>
         </div>
 
