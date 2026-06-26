@@ -144,40 +144,62 @@ class TeamController extends Controller
      */
     public function updateRole(Request $request, $memberId)
     {
-        $validated = $request->validate([
-            'role' => 'required|in:member,manager,admin',
-        ]);
-
-        $member = User::findOrFail($memberId);
-
-        // Check if current user is authenticated and is OWNER only
-        if (!auth()->check()) {
-            return back()->with('error', 'Unauthorized: Not authenticated');
-        }
-
-        $currentUser = auth()->user();
-        if ($currentUser->role !== 'owner') {
-            return back()->with('error', 'Unauthorized: Only the owner can change member roles');
-        }
-
-        // Prevent changing owner role
-        if ($member->role === 'owner') {
-            return back()->with('error', 'Cannot change the owner\'s role');
-        }
-
-        // Update the role
-        $member->update(['role' => $validated['role']]);
-
-        $message = '✅ ' . $member->name . ' role changed to ' . ucfirst($validated['role']);
-
-        if ($request->expectsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => $message
+        try {
+            $validated = $request->validate([
+                'role' => 'required|in:member,manager,admin',
             ]);
-        }
 
-        return back()->with('success', $message);
+            $member = User::findOrFail($memberId);
+
+            // Check if current user is authenticated
+            if (!auth()->check()) {
+                $error = 'Unauthorized: Not authenticated';
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => false, 'message' => $error], 401);
+                }
+                return back()->with('error', $error);
+            }
+
+            $currentUser = auth()->user();
+
+            // Check if current user is OWNER only
+            if ($currentUser->role !== 'owner') {
+                $error = 'Unauthorized: Only the owner can change member roles';
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => false, 'message' => $error], 403);
+                }
+                return back()->with('error', $error);
+            }
+
+            // Prevent changing owner role
+            if ($member->role === 'owner') {
+                $error = 'Cannot change the owner\'s role';
+                if ($request->expectsJson()) {
+                    return response()->json(['success' => false, 'message' => $error], 400);
+                }
+                return back()->with('error', $error);
+            }
+
+            // Update the role
+            $member->update(['role' => $validated['role']]);
+
+            $message = '✅ ' . $member->name . ' role changed to ' . ucfirst($validated['role']);
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => $message
+                ], 200);
+            }
+
+            return back()->with('success', $message);
+        } catch (\Exception $e) {
+            $error = 'Error: ' . $e->getMessage();
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => $error], 500);
+            }
+            return back()->with('error', $error);
+        }
     }
 
     /**

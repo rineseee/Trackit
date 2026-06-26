@@ -770,19 +770,35 @@
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'application/json'
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
             })
             .then(response => {
-                // Check if response is OK
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+
+                // Get response text first to debug
+                return response.text().then(text => {
+                    console.log('Raw response:', text);
+                    try {
+                        const data = JSON.parse(text);
+                        return { ok: response.ok, data: data };
+                    } catch (e) {
+                        console.error('JSON parse error:', e);
+                        return { ok: response.ok, data: null, text: text };
+                    }
+                });
             })
-            .then(data => {
-                if (data.success) {
+            .then(result => {
+                if (!result.ok) {
+                    throw new Error(`HTTP error! status: ${result.status}`);
+                }
+
+                if (!result.data) {
+                    throw new Error('Invalid JSON response: ' + result.text);
+                }
+
+                if (result.data.success) {
                     // Update the select value
                     select.value = newRole;
 
@@ -794,7 +810,7 @@
                     select.style.opacity = '1';
                 } else {
                     // Show error
-                    showRoleChangeError(data.message || 'Failed to update role');
+                    showRoleChangeError(result.data.message || 'Failed to update role');
 
                     // Reset select to old value
                     select.value = oldRole;
@@ -803,8 +819,8 @@
                 }
             })
             .catch(error => {
-                console.error('Fetch error:', error);
-                showRoleChangeError('Network error updating role. Please refresh and try again.');
+                console.error('Full error:', error);
+                showRoleChangeError('Network error: ' + error.message);
                 select.value = oldRole;
                 select.disabled = false;
                 select.style.opacity = '1';
