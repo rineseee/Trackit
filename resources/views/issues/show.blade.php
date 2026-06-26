@@ -676,7 +676,7 @@
                     <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
                         <span class="hero-kicker">
                             <i class="bi bi-journal-text"></i>
-                            Issue #{{ $issue->id }}
+                            Issue #{{ $issue->issue_number }}
                         </span>
                         <span class="status-pill {{ $statusClass }}">
                             <i class="bi bi-circle-fill" style="font-size: .55rem;"></i>

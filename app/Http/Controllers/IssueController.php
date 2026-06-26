@@ -76,6 +76,9 @@ class IssueController extends Controller
         $tagIds = $data['tags'] ?? [];
         unset($data['tags']);
 
+        $nextIssueNumber = Issue::where('project_id', $data['project_id'])->max('issue_number') + 1;
+        $data['issue_number'] = $nextIssueNumber;
+
         $issue = Issue::create($data);
         $issue->tags()->sync($tagIds);
 
