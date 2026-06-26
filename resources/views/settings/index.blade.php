@@ -118,20 +118,35 @@
         .btn-primary {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            padding: 8px 12px;
+            padding: 10px 16px;
             background: var(--trackit-primary);
-            color: white;
+            color: white !important;
             border: none;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 150ms ease;
+            text-decoration: none;
+            outline: none;
         }
 
         .btn-primary:hover {
-            opacity: 0.9;
+            background: #1d4ed8;
+            opacity: 1;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary:focus {
+            outline: 2px solid var(--trackit-primary);
+            outline-offset: 2px;
         }
 
         .preferences-form {
@@ -270,20 +285,34 @@
         .btn-danger {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
-            padding: 8px 12px;
+            padding: 10px 16px;
             background: #dc2626;
-            color: white;
+            color: white !important;
             border: none;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             transition: all 150ms ease;
+            text-decoration: none;
+            outline: none;
         }
 
         .btn-danger:hover {
             background: #b91c1c;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-danger:active {
+            transform: translateY(0);
+        }
+
+        .btn-danger:focus {
+            outline: 2px solid #dc2626;
+            outline-offset: 2px;
         }
 
         .error-message {
