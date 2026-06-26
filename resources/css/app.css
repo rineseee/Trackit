@@ -2631,6 +2631,18 @@
     }
 
     /* ============================================================================
+       NEW ISSUE BUTTON - BLACK ICON
+       ============================================================================ */
+
+    .dashboard-header-right .btn.btn-primary i.bi-plus-lg {
+        color: black !important;
+    }
+
+    html[data-theme='dark'] .dashboard-header-right .btn.btn-primary i.bi-plus-lg {
+        color: black !important;
+    }
+
+    /* ============================================================================
        SETTINGS PAGE
        ============================================================================ */
 
