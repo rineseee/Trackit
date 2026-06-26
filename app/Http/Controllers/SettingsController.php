@@ -110,7 +110,16 @@ class SettingsController extends Controller
         // Apply theme immediately via session
         session(['theme' => $validated['theme']]);
 
-        return back()->with('success', '✅ Preferences saved! Theme, language, and timezone updated.');
+        // Apply language immediately
+        session(['locale' => $validated['language']]);
+        app()->setLocale($validated['language']);
+        \Cookie::queue('locale', $validated['language'], 60 * 24 * 365);
+
+        // Apply timezone immediately
+        session(['timezone' => $validated['timezone']]);
+        date_default_timezone_set($validated['timezone']);
+
+        return back()->with('success', '✅ Preferences saved! Theme, language (' . strtoupper($validated['language']) . '), and timezone (' . $validated['timezone'] . ') updated.');
     }
 
     /**

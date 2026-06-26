@@ -603,6 +603,7 @@
 
                     <script>
                         document.getElementById('preferencesForm').addEventListener('submit', function(e) {
+                            // Apply theme immediately
                             const theme = document.getElementById('themeSelect').value;
                             if (theme === 'dark') {
                                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -612,14 +613,45 @@
                                 localStorage.setItem('theme', 'light');
                             }
 
+                            // Store language and timezone
+                            const language = document.getElementById('languageSelect').value;
+                            const timezone = document.getElementById('timezoneSelect').value;
+
+                            localStorage.setItem('language', language);
+                            localStorage.setItem('timezone', timezone);
+
+                            // Show loading state
                             const btn = document.getElementById('prefSaveBtn');
                             btn.disabled = true;
-                            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+                            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Applying ' +
+                                getLanguageName(language) + ', ' + timezone + '...';
                         });
 
+                        // Helper function to get language name
+                        function getLanguageName(code) {
+                            const names = {
+                                'en': 'English',
+                                'sq': 'Shqip',
+                                'it': 'Italiano'
+                            };
+                            return names[code] || code;
+                        }
+
+                        // Apply saved theme on page load
                         const savedTheme = localStorage.getItem('theme') || 'light';
                         if (savedTheme === 'dark') {
                             document.documentElement.setAttribute('data-theme', 'dark');
+                        }
+
+                        // Show current language and timezone
+                        const savedLanguage = localStorage.getItem('language');
+                        if (savedLanguage) {
+                            console.log('Language set to: ' + getLanguageName(savedLanguage));
+                        }
+
+                        const savedTimezone = localStorage.getItem('timezone');
+                        if (savedTimezone) {
+                            console.log('Timezone set to: ' + savedTimezone);
                         }
                     </script>
                 </div>
