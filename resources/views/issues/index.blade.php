@@ -21,14 +21,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--trackit-border);
+            margin-bottom: 24px;
+            padding-bottom: 0;
+            border-bottom: none;
         }
 
         .issues-header-content h1 {
-            margin: 0 0 2px;
-            font-size: 24px;
+            margin: 0 0 4px;
+            font-size: 28px;
             font-weight: 700;
             color: var(--trackit-text);
         }
@@ -46,37 +46,43 @@
 
         .issues-overview {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
 
         .overview-card {
             background: var(--trackit-surface);
             border: 1px solid var(--trackit-border);
             border-radius: 8px;
-            padding: 12px;
+            padding: 14px;
             text-align: center;
+            transition: all 150ms ease;
+        }
+
+        .overview-card:hover {
+            border-color: var(--trackit-primary);
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.08);
         }
 
         .overview-card i {
-            font-size: 16px;
+            font-size: 18px;
             color: var(--trackit-primary);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             display: block;
         }
 
         .overview-label {
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 11px;
+            font-weight: 600;
             color: var(--trackit-muted);
             text-transform: uppercase;
             letter-spacing: 0.04em;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .overview-value {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--trackit-text);
         }
@@ -95,7 +101,7 @@
 
         .filter-search {
             flex: 1;
-            min-width: 200px;
+            min-width: 180px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -108,7 +114,7 @@
 
         .filter-search:focus-within {
             border-color: var(--trackit-primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
         }
 
         .filter-search i {
@@ -138,7 +144,7 @@
             font-size: 13px;
             cursor: pointer;
             transition: all 150ms ease;
-            min-width: 120px;
+            min-width: 110px;
         }
 
         .issues-toolbar select:hover,
@@ -161,9 +167,9 @@
         }
 
         .issues-panel-header {
-            padding: 12px 16px;
+            padding: 14px 16px;
             border-bottom: 1px solid var(--trackit-border);
-            background: var(--trackit-surface-soft);
+            background: var(--trackit-surface);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -171,19 +177,18 @@
 
         .issues-panel-header h2 {
             margin: 0;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--trackit-text);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
         }
 
         .issues-panel-count {
             font-size: 12px;
             color: var(--trackit-muted);
-            background: var(--trackit-surface);
-            padding: 4px 8px;
-            border-radius: 4px;
+            background: var(--trackit-surface-soft);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: 600;
         }
 
         .responsive-table {
