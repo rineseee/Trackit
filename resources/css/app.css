@@ -4079,6 +4079,10 @@ html[data-theme='dark'] .kanban-card {
         box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
     }
 
+    .trackit-sidebar-toggle {
+        display: inline-flex !important;
+    }
+
     .trackit-sidebar-backdrop:not([hidden]) {
         display: block !important;
         position: fixed;
