@@ -766,61 +766,58 @@
             // Submit via AJAX
             const formData = new FormData(form);
 
+            console.log('Submitting role change for member', memberId, 'to role', newRole);
+            console.log('Form action:', form.action);
+
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
                 }
             })
             .then(response => {
+                console.log('Raw response object:', response);
                 console.log('Response status:', response.status);
-                console.log('Response headers:', response.headers);
+                console.log('Response ok:', response.ok);
 
-                // Get response text first to debug
-                return response.text().then(text => {
-                    console.log('Raw response:', text);
-                    try {
-                        const data = JSON.parse(text);
-                        return { ok: response.ok, data: data };
-                    } catch (e) {
-                        console.error('JSON parse error:', e);
-                        return { ok: response.ok, data: null, text: text };
-                    }
+                return response.text().then(responseText => {
+                    console.log('Response text:', responseText);
+                    return { status: response.status, ok: response.ok, text: responseText };
                 });
             })
             .then(result => {
-                if (!result.ok) {
-                    throw new Error(`HTTP error! status: ${result.status}`);
+                console.log('Processing result:', result);
+
+                let data;
+                try {
+                    data = JSON.parse(result.text);
+                    console.log('Parsed JSON:', data);
+                } catch (e) {
+                    console.error('JSON parse failed. Response was:', result.text);
+                    throw new Error('Server returned invalid JSON: ' + result.text.substring(0, 100));
                 }
 
-                if (!result.data) {
-                    throw new Error('Invalid JSON response: ' + result.text);
-                }
-
-                if (result.data.success) {
-                    // Update the select value
+                if (data.success) {
+                    console.log('Success! Role updated');
                     select.value = newRole;
-
-                    // Show success message
                     showRoleChangeSuccess(memberName, newRole);
-
-                    // Re-enable select
                     select.disabled = false;
                     select.style.opacity = '1';
                 } else {
-                    // Show error
-                    showRoleChangeError(result.data.message || 'Failed to update role');
-
-                    // Reset select to old value
+                    console.log('Server returned error:', data.message);
+                    showRoleChangeError(data.message || 'Failed to update role');
                     select.value = oldRole;
                     select.disabled = false;
                     select.style.opacity = '1';
                 }
             })
             .catch(error => {
-                console.error('Full error:', error);
-                showRoleChangeError('Network error: ' + error.message);
+                console.error('Catch block error:', error);
+                console.error('Error message:', error.message);
+                console.error('Error stack:', error.stack);
+                showRoleChangeError('Error: ' + error.message);
                 select.value = oldRole;
                 select.disabled = false;
                 select.style.opacity = '1';
