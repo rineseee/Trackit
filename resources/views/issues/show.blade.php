@@ -126,36 +126,51 @@
 
         .detail-label {
             color: var(--text-muted);
-            font-size: .7rem;
-            font-weight: 800;
+            font-size: .65rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: .04em;
+            letter-spacing: .03em;
         }
 
         .detail-value {
             color: var(--text-main);
-            font-weight: 700;
-            font-size: .9rem;
+            font-weight: 600;
+            font-size: .8rem;
         }
 
         .side-card {
-            padding: 0.75rem !important;
-        }
-
-        .side-card .rounded-4 {
             padding: 0.5rem !important;
         }
 
+        .side-card .rounded-4 {
+            padding: 0.35rem !important;
+        }
+
         .side-card .d-grid {
-            gap: 0.5rem !important;
+            gap: 0.35rem !important;
         }
 
         .side-card .detail-label {
-            margin-bottom: 0.25rem !important;
+            margin-bottom: 0.15rem !important;
         }
 
         .side-card .section-title {
-            font-size: 0.95rem !important;
+            font-size: 0.85rem !important;
+            font-weight: 700 !important;
+        }
+
+        .side-card .muted-pill {
+            font-size: 0.7rem !important;
+            padding: 0.25rem 0.5rem !important;
+        }
+
+        .side-card .btn-sm {
+            font-size: 0.8rem !important;
+            padding: 0.35rem 0.75rem !important;
+        }
+
+        .sticky-column > .side-card {
+            margin-bottom: 0.75rem !important;
         }
 
         .timeline {
@@ -224,18 +239,18 @@
         .member-chip {
             display: inline-flex;
             align-items: center;
-            gap: .5rem;
-            padding: .45rem .7rem;
+            gap: .35rem;
+            padding: .3rem .55rem;
             border-radius: 999px;
-            font-size: .8rem;
-            font-weight: 700;
+            font-size: .75rem;
+            font-weight: 600;
             border: 1px solid #e2e8f0;
             background: #fff;
         }
 
         .tag-chip .dot {
-            width: .55rem;
-            height: .55rem;
+            width: .45rem;
+            height: .45rem;
             border-radius: 999px;
             flex-shrink: 0;
         }
@@ -866,7 +881,7 @@
                         <div class="d-flex flex-wrap gap-2" id="membersList">
                             @forelse ($issue->members as $member)
                                 <span class="member-chip" data-member-chip="{{ $member->id }}">
-                                    <span class="member-avatar" style="width: 28px; height: 28px; font-size: .65rem;">
+                                    <span class="member-avatar" style="width: 24px; height: 24px; font-size: .6rem;">
                                         {{ $initials($member->name) }}
                                     </span>
                                     {{ $member->name }}
