@@ -126,7 +126,7 @@
 
         .detail-label {
             color: var(--text-muted);
-            font-size: .78rem;
+            font-size: .7rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: .04em;
@@ -135,6 +135,27 @@
         .detail-value {
             color: var(--text-main);
             font-weight: 700;
+            font-size: .9rem;
+        }
+
+        .side-card {
+            padding: 0.75rem !important;
+        }
+
+        .side-card .rounded-4 {
+            padding: 0.5rem !important;
+        }
+
+        .side-card .d-grid {
+            gap: 0.5rem !important;
+        }
+
+        .side-card .detail-label {
+            margin-bottom: 0.25rem !important;
+        }
+
+        .side-card .section-title {
+            font-size: 0.95rem !important;
         }
 
         .timeline {
@@ -768,36 +789,36 @@
 
             <div class="col-12 col-lg-4">
                 <div class="sticky-column">
-                    <div class="side-card p-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h2 class="section-title h5 mb-0">Details</h2>
+                    <div class="side-card mb-2">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h2 class="section-title mb-0">Details</h2>
                             <span class="muted-pill">
                                 <i class="bi bi-sliders"></i>
                                 At a glance
                             </span>
                         </div>
 
-                        <div class="row g-3">
+                        <div class="row g-2">
                             <div class="col-6">
-                                <div class="rounded-4 bg-light border p-3 h-100">
+                                <div class="rounded-4 bg-light border h-100">
                                     <div class="detail-label mb-1">Status</div>
                                     <div class="detail-value">{{ ucfirst(str_replace('_', ' ', $issue->status)) }}</div>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="rounded-4 bg-light border p-3 h-100">
+                                <div class="rounded-4 bg-light border h-100">
                                     <div class="detail-label mb-1">Priority</div>
                                     <div class="detail-value">{{ ucfirst($issue->priority) }}</div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="rounded-4 bg-light border p-3">
+                                <div class="rounded-4 bg-light border">
                                     <div class="detail-label mb-1">Project</div>
                                     <div class="detail-value">{{ $issue->project->name }}</div>
                                 </div>
                             </div>
                             <div class="col-12">
-                                <div class="rounded-4 bg-light border p-3">
+                                <div class="rounded-4 bg-light border">
                                     <div class="detail-label mb-1">Due Date</div>
                                     <div class="detail-value">
                                         {{ $issue->due_date ? $issue->due_date->format('M d, Y') : 'No due date' }}
@@ -807,9 +828,9 @@
                         </div>
                     </div>
 
-                    <div class="side-card p-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h2 class="section-title h5 mb-0">Tags</h2>
+                    <div class="side-card mb-2">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h2 class="section-title mb-0">Tags</h2>
                             <span class="muted-pill" id="tagCount">{{ $issue->tags->count() }} attached</span>
                         </div>
 
@@ -828,24 +849,24 @@
                             @endforelse
                         </div>
 
-                        <div class="d-flex gap-2 mt-3">
-                            <button type="button" class="btn btn-outline-primary flex-grow-1" data-bs-toggle="modal"
+                        <div class="d-flex gap-2 mt-2">
+                            <button type="button" class="btn btn-outline-primary flex-grow-1 btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#tagModal">
                                 <i class="bi bi-tag me-2"></i>Manage tags
                             </button>
                         </div>
                     </div>
 
-                    <div class="side-card p-4 mb-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h2 class="section-title h5 mb-0">Assigned Members</h2>
+                    <div class="side-card mb-2">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h2 class="section-title mb-0">Assigned Members</h2>
                             <span class="muted-pill" id="memberCount">{{ $issue->members->count() }} assigned</span>
                         </div>
 
                         <div class="d-flex flex-wrap gap-2" id="membersList">
                             @forelse ($issue->members as $member)
                                 <span class="member-chip" data-member-chip="{{ $member->id }}">
-                                    <span class="member-avatar" style="width: 30px; height: 30px; font-size: .7rem;">
+                                    <span class="member-avatar" style="width: 28px; height: 28px; font-size: .65rem;">
                                         {{ $initials($member->name) }}
                                     </span>
                                     {{ $member->name }}
@@ -859,29 +880,29 @@
                             @endforelse
                         </div>
 
-                        <div class="d-flex gap-2 mt-3">
-                            <button type="button" class="btn btn-outline-primary flex-grow-1" data-bs-toggle="modal"
+                        <div class="d-flex gap-2 mt-2">
+                            <button type="button" class="btn btn-outline-primary flex-grow-1 btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#memberModal">
                                 <i class="bi bi-people me-2"></i>Manage members
                             </button>
                         </div>
                     </div>
 
-                    <div class="side-card p-4">
-                        <div class="d-flex align-items-center justify-content-between mb-3">
-                            <h2 class="section-title h5 mb-0">Activity</h2>
+                    <div class="side-card">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h2 class="section-title mb-0">Activity</h2>
                             <span class="muted-pill">
                                 <i class="bi bi-clock-history"></i>
                                 Issue meta
                             </span>
                         </div>
 
-                        <div class="d-grid gap-3">
-                            <div class="rounded-4 bg-light border p-3">
+                        <div class="d-grid gap-2">
+                            <div class="rounded-4 bg-light border">
                                 <div class="detail-label mb-1">Created</div>
                                 <div class="detail-value">{{ $issue->created_at->format('M d, Y H:i') }}</div>
                             </div>
-                            <div class="rounded-4 bg-light border p-3">
+                            <div class="rounded-4 bg-light border">
                                 <div class="detail-label mb-1">Updated</div>
                                 <div class="detail-value">{{ $issue->updated_at->format('M d, Y H:i') }}</div>
                             </div>
