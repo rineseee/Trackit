@@ -12,7 +12,7 @@
             --text-muted: #64748b;
             --brand: #2563eb;
             --brand-2: #0ea5e9;
-            --shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+            --shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
         }
 
         .hero-card,
@@ -34,22 +34,15 @@
         }
 
         .hero-card {
-            background:
-                radial-gradient(circle at top right, rgba(37, 99, 235, 0.06), transparent 28%),
-                radial-gradient(circle at bottom left, rgba(14, 165, 233, 0.04), transparent 22%),
-                linear-gradient(180deg, var(--surface) 0%, var(--surface-soft) 100%);
+            background: var(--surface);
             overflow: hidden;
-            transition: all 200ms ease;
-        }
-
-        .hero-card:hover {
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
         }
 
         .hero-title {
             color: var(--text-main);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
             font-weight: 700;
+            font-size: 1.875rem;
         }
 
         .hero-kicker,
@@ -174,6 +167,7 @@
             padding: 0.75rem !important;
             background: var(--surface-soft) !important;
             border-color: var(--line) !important;
+            border-radius: 8px !important;
         }
 
         .side-card .d-grid {
@@ -182,27 +176,25 @@
 
         .side-card .detail-label {
             margin-bottom: 0.35rem !important;
-            font-size: 0.7rem !important;
+            font-size: 0.65rem !important;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
+            color: var(--text-muted);
         }
 
         .side-card .section-title {
-            font-size: 1rem !important;
+            font-size: 0.95rem !important;
             font-weight: 700 !important;
-            color: var(--text-main);
         }
 
         .side-card .muted-pill {
-            font-size: 0.75rem !important;
-            padding: 0.35rem 0.65rem !important;
-            background: rgba(99, 102, 241, 0.08) !important;
-            color: var(--brand) !important;
+            font-size: 0.7rem !important;
+            padding: 0.3rem 0.6rem !important;
         }
 
         .side-card .btn-sm {
-            font-size: 0.85rem !important;
-            padding: 0.5rem 1rem !important;
+            font-size: 0.8rem !important;
+            padding: 0.4rem 0.8rem !important;
         }
 
         .sticky-column > .side-card {
@@ -219,18 +211,6 @@
             display: flex;
             gap: 1rem;
             align-items: flex-start;
-            animation: slideIn 300ms ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .comment-avatar,
@@ -242,140 +222,74 @@
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-weight: 800;
-            font-size: 0.85rem;
+            font-weight: 700;
+            font-size: 0.8rem;
             flex-shrink: 0;
             background: linear-gradient(135deg, #2563eb, #0ea5e9);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-            transition: all 150ms ease;
-        }
-
-        .comment-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
         }
 
         .comment-body {
-            position: relative;
-            padding: 1.125rem;
+            padding: 1rem;
             background: var(--surface-soft);
             border: 1px solid var(--line);
-            border-radius: 14px;
-            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+            border-radius: 10px;
             width: 100%;
-            transition: all 150ms ease;
-        }
-
-        .comment-body:hover {
-            border-color: var(--brand);
-            background: var(--surface);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
         }
 
         .comment-body::before {
-            content: '';
-            position: absolute;
-            left: -6px;
-            top: 16px;
-            width: 12px;
-            height: 12px;
-            background: var(--surface-soft);
-            border-left: 1px solid var(--line);
-            border-bottom: 1px solid var(--line);
-            transform: rotate(45deg);
+            display: none;
         }
 
         .comment-bubble.meta-right .comment-body {
-            background: rgba(37, 99, 235, 0.04);
-            border-color: rgba(37, 99, 235, 0.15);
-        }
-
-        .comment-bubble.meta-right .comment-body:hover {
-            background: rgba(37, 99, 235, 0.08);
-            border-color: var(--brand);
-        }
-
-        .comment-bubble.meta-right .comment-body::before {
-            background: rgba(37, 99, 235, 0.04);
-            border-left-color: rgba(37, 99, 235, 0.15);
-            border-bottom-color: rgba(37, 99, 235, 0.15);
+            background: rgba(37, 99, 235, 0.06);
+            border-color: rgba(37, 99, 235, 0.1);
         }
 
         .tag-chip,
         .member-chip {
             display: inline-flex;
             align-items: center;
-            gap: .5rem;
-            padding: .45rem .75rem;
-            border-radius: 999px;
-            font-size: .8rem;
+            gap: .4rem;
+            padding: .4rem .7rem;
+            border-radius: 20px;
+            font-size: .75rem;
             font-weight: 600;
             border: 1px solid var(--line);
-            background: var(--surface);
-            transition: all 150ms ease;
-        }
-
-        .tag-chip:hover {
             background: var(--surface-soft);
-            border-color: var(--brand);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
         }
 
         .tag-chip .dot {
-            width: .55rem;
-            height: .55rem;
+            width: .5rem;
+            height: .5rem;
             border-radius: 999px;
             flex-shrink: 0;
-            opacity: 0.9;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .member-chip {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(14, 165, 233, 0.05));
-        }
-
-        .member-chip:hover {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(14, 165, 233, 0.1));
-            border-color: var(--brand);
+            background: var(--surface-soft);
         }
 
         .tag-action {
             border: 0;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: rgba(100, 116, 139, 0.1);
-            color: #64748b;
-            transition: all .2s ease;
+            background: transparent;
+            color: var(--text-muted);
             cursor: pointer;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            padding: 0;
         }
 
         .tag-action:hover {
-            background: rgba(100, 116, 139, 0.2);
-            color: #475569;
-            transform: scale(1.1);
-        }
-
-        .tag-action.attached {
-            background: rgba(16, 185, 129, 0.15);
-            color: #059669;
-        }
-
-        .tag-action.attached:hover {
-            background: rgba(16, 185, 129, 0.25);
+            color: var(--text-main);
         }
 
         .tag-action.detached {
-            background: rgba(220, 38, 38, 0.1);
             color: #dc2626;
-        }
-
-        .tag-action.detached:hover {
-            background: rgba(220, 38, 38, 0.2);
         }
 
         .search-field {
@@ -405,14 +319,8 @@
 
         .empty-state {
             border: 1px dashed var(--line);
-            border-radius: 14px;
-            background: linear-gradient(180deg, var(--surface), var(--surface-soft));
-            transition: all 150ms ease;
-        }
-
-        .empty-state:hover {
-            border-color: var(--brand);
-            background: var(--surface);
+            border-radius: 10px;
+            background: var(--surface-soft);
         }
 
         .toast-container {
