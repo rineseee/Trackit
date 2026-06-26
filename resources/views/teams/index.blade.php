@@ -659,10 +659,10 @@
                                 @endif
                             </div>
                             <div class="member-actions">
-                                <form action="{{ route('teams.updateRole', $member->id) }}" method="POST" style="flex: 1;">
+                                <form action="{{ route('teams.updateRole', $member->id) }}" method="POST" style="flex: 1;" class="role-form" data-member-id="{{ $member->id }}" data-member-name="{{ $member->name }}">
                                     @csrf
                                     @method('PUT')
-                                    <select name="role" onchange="this.form.submit()" class="role-select">
+                                    <select name="role" class="role-select" onchange="updateMemberRole(event)">
                                         <option value="member" {{ ($member->role ?? 'member') === 'member' ? 'selected' : '' }}>Member</option>
                                         <option value="manager" {{ ($member->role ?? 'member') === 'manager' ? 'selected' : '' }}>Manager</option>
                                         <option value="admin" {{ ($member->role ?? 'member') === 'admin' ? 'selected' : '' }}>Admin</option>
@@ -729,5 +729,116 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function updateMemberRole(event) {
+            const select = event.target;
+            const form = select.closest('.role-form');
+            const newRole = select.value;
+            const memberId = form.dataset.memberId;
+            const memberName = form.dataset.memberName;
+            const oldRole = select.options[select.selectedIndex].defaultSelected ? select.options[select.selectedIndex].value : select.options[0].value;
+
+            // Get current selected value before change
+            const currentOption = select.querySelector(`option[value="${oldRole}"]`);
+            if (currentOption) {
+                currentOption.selected = true;
+            }
+
+            // Show loading state
+            const originalText = select.innerHTML;
+            select.disabled = true;
+            select.style.opacity = '0.6';
+
+            // Submit via AJAX
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Update the select value
+                    select.value = newRole;
+
+                    // Show success message
+                    showRoleChangeSuccess(memberName, newRole);
+
+                    // Re-enable select
+                    select.disabled = false;
+                    select.style.opacity = '1';
+                } else {
+                    // Show error
+                    showRoleChangeError(data.message || 'Failed to update role');
+
+                    // Reset select to old value
+                    select.value = oldRole;
+                    select.disabled = false;
+                    select.style.opacity = '1';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showRoleChangeError('Error updating role. Please try again.');
+                select.value = oldRole;
+                select.disabled = false;
+                select.style.opacity = '1';
+            });
+        }
+
+        function showRoleChangeSuccess(memberName, newRole) {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #f0fdf4;
+                border-left: 4px solid #22c55e;
+                color: #166534;
+                padding: 12px 16px;
+                border-radius: 4px;
+                z-index: 9999;
+                font-size: 13px;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            `;
+            message.innerHTML = `✅ ${memberName} is now ${newRole}`;
+            document.body.appendChild(message);
+
+            setTimeout(() => {
+                message.remove();
+            }, 3000);
+        }
+
+        function showRoleChangeError(errorMessage) {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #fef2f2;
+                border-left: 4px solid #dc2626;
+                color: #991b1b;
+                padding: 12px 16px;
+                border-radius: 4px;
+                z-index: 9999;
+                font-size: 13px;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            `;
+            message.innerHTML = `❌ ${errorMessage}`;
+            document.body.appendChild(message);
+
+            setTimeout(() => {
+                message.remove();
+            }, 4000);
+        }
+    </script>
 
 @endsection
