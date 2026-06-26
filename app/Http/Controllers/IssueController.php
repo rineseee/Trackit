@@ -46,6 +46,14 @@ class IssueController extends Controller
             ->paginate(10)
             ->withQueryString();
 
+        $allIssues = Issue::query()->get();
+        $openIssues = $allIssues->where('status', 'open')->count();
+        $inProgressIssues = $allIssues->where('status', 'in_progress')->count();
+        $closedIssues = $allIssues->where('status', 'closed')->count();
+        $overdueIssues = $allIssues->where('due_date', '<', now()->startOfDay())
+            ->whereIn('status', ['open', 'in_progress'])
+            ->count();
+
         if ($request->ajax()) {
             return response()->json([
                 'html' => view('issues._list', compact('issues'))->render(),
@@ -58,6 +66,10 @@ class IssueController extends Controller
             'issues' => $issues,
             'projects' => Project::query()->orderBy('name')->get(['id', 'name']),
             'tags' => Tag::query()->orderBy('name')->get(['id', 'name', 'color']),
+            'openIssues' => $openIssues,
+            'inProgressIssues' => $inProgressIssues,
+            'closedIssues' => $closedIssues,
+            'overdueIssues' => $overdueIssues,
         ]);
     }
 

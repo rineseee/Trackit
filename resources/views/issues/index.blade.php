@@ -534,7 +534,7 @@
                             <tr onclick="window.location.href='{{ route('issues.show', $issue) }}';">
                                 <td>
                                     <div class="issue-cell">
-                                        <span class="issue-id">#{{ $issue->id }}</span>
+                                        <span class="issue-id">#{{ $issue->issue_number }}</span>
                                         <a href="{{ route('issues.show', $issue) }}" class="issue-title" onclick="event.stopPropagation();">
                                             {{ \Illuminate\Support\Str::limit($issue->title, 50) }}
                                         </a>
