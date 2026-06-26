@@ -46,11 +46,10 @@ class IssueController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        $allIssues = Issue::query()->get();
-        $openIssues = $allIssues->where('status', 'open')->count();
-        $inProgressIssues = $allIssues->where('status', 'in_progress')->count();
-        $closedIssues = $allIssues->where('status', 'closed')->count();
-        $overdueIssues = $allIssues->where('due_date', '<', now()->startOfDay())
+        $openIssues = Issue::where('status', 'open')->count();
+        $inProgressIssues = Issue::where('status', 'in_progress')->count();
+        $closedIssues = Issue::where('status', 'closed')->count();
+        $overdueIssues = Issue::where('due_date', '<', now()->startOfDay())
             ->whereIn('status', ['open', 'in_progress'])
             ->count();
 
