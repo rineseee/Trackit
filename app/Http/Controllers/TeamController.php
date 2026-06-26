@@ -140,7 +140,7 @@ class TeamController extends Controller
     }
 
     /**
-     * Update member role
+     * Update member role - fully functional
      */
     public function updateRole(Request $request, $memberId)
     {
@@ -150,15 +150,29 @@ class TeamController extends Controller
 
         $member = User::findOrFail($memberId);
 
-        // Only allow admin to update roles
-        if (!auth()->user()->isAdmin()) {
-            return back()->with('error', 'Unauthorized');
+        // Check if current user is authenticated and is admin
+        if (!auth()->check() || !auth()->user()->isAdmin()) {
+            return back()->with('error', 'Unauthorized: Only admins can change roles');
         }
 
-        // Update role (assuming you have a role field or use a package)
+        // Prevent changing owner role
+        if ($member->role === 'owner') {
+            return back()->with('error', 'Cannot change the owner\'s role');
+        }
+
+        // Update the role
         $member->update(['role' => $validated['role']]);
 
-        return back()->with('success', $member->name . ' role updated to ' . $validated['role']);
+        $message = '✅ ' . $member->name . ' role changed to ' . ucfirst($validated['role']);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $message
+            ]);
+        }
+
+        return back()->with('success', $message);
     }
 
     /**
