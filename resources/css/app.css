@@ -54,6 +54,20 @@
         --trackit-sidebar-width: 280px;
         --trackit-topbar-height: 72px;
 
+        /* SPACING SCALE (Standardized) */
+        --space-xs: 4px;
+        --space-sm: 8px;
+        --space-md: 12px;
+        --space-lg: 16px;
+        --space-xl: 24px;
+        --space-2xl: 32px;
+
+        /* CONTAINER WIDTHS */
+        --container-max-width: 1400px;
+        --container-padding: var(--space-2xl);
+        --container-padding-tablet: 20px;
+        --container-padding-mobile: 16px;
+
         /* UI SYSTEM (reference global tokens) */
         --ui-panel: var(--trackit-surface);
         --ui-panel-muted: #f9fafb;
@@ -261,8 +275,21 @@
     .trackit-page {
         flex: 1;
         width: 100%;
-        max-width: 100%;
-        padding: 24px;
+        max-width: var(--container-max-width);
+        margin: 0 auto;
+        padding: var(--container-padding);
+    }
+
+    @media (max-width: 1024px) {
+        .trackit-page {
+            padding: var(--container-padding-tablet);
+        }
+    }
+
+    @media (max-width: 640px) {
+        .trackit-page {
+            padding: var(--container-padding-mobile);
+        }
     }
 
     /* ============================================================================
