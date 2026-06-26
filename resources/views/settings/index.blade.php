@@ -603,28 +603,72 @@
 
                     <script>
                         document.getElementById('preferencesForm').addEventListener('submit', function(e) {
-                            // Apply theme immediately
-                            const theme = document.getElementById('themeSelect').value;
-                            if (theme === 'dark') {
-                                document.documentElement.setAttribute('data-theme', 'dark');
-                                localStorage.setItem('theme', 'dark');
-                            } else {
-                                document.documentElement.removeAttribute('data-theme');
-                                localStorage.setItem('theme', 'light');
-                            }
+                            e.preventDefault();
 
-                            // Store language and timezone
+                            const theme = document.getElementById('themeSelect').value;
                             const language = document.getElementById('languageSelect').value;
                             const timezone = document.getElementById('timezoneSelect').value;
-
-                            localStorage.setItem('language', language);
-                            localStorage.setItem('timezone', timezone);
+                            const btn = document.getElementById('prefSaveBtn');
 
                             // Show loading state
-                            const btn = document.getElementById('prefSaveBtn');
                             btn.disabled = true;
-                            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Applying ' +
-                                getLanguageName(language) + ', ' + timezone + '...';
+                            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+
+                            // Prepare form data
+                            const formData = new FormData(this);
+
+                            // Send AJAX request
+                            fetch('{{ route("settings.updatePreferences") }}', {
+                                method: 'POST',
+                                body: formData,
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                    'Accept': 'application/json'
+                                }
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                // Apply theme immediately
+                                if (theme === 'dark') {
+                                    document.documentElement.setAttribute('data-theme', 'dark');
+                                    localStorage.setItem('theme', 'dark');
+                                } else {
+                                    document.documentElement.removeAttribute('data-theme');
+                                    localStorage.setItem('theme', 'light');
+                                }
+
+                                // Store in localStorage
+                                localStorage.setItem('language', language);
+                                localStorage.setItem('timezone', timezone);
+
+                                // Show success message
+                                const successDiv = document.createElement('div');
+                                successDiv.className = 'success-message';
+                                successDiv.style.cssText = 'margin-bottom: 12px; padding: 10px 12px; background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 4px; color: #166534;';
+                                successDiv.innerHTML = '✅ Preferences updated! Theme: ' + theme + ', Language: ' + getLanguageName(language) + ', Timezone: ' + timezone;
+
+                                // Insert success message
+                                const form = document.getElementById('preferencesForm');
+                                form.parentElement.insertBefore(successDiv, form);
+
+                                // Remove old success messages
+                                const oldMessages = document.querySelectorAll('.success-message');
+                                if (oldMessages.length > 1) {
+                                    oldMessages[oldMessages.length - 2].remove();
+                                }
+
+                                // Reset button
+                                setTimeout(() => {
+                                    btn.disabled = false;
+                                    btn.innerHTML = '<i class="bi bi-check2"></i> Save Preferences';
+                                }, 2000);
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                btn.disabled = false;
+                                btn.innerHTML = '<i class="bi bi-check2"></i> Save Preferences';
+                                alert('Error saving preferences. Please try again.');
+                            });
                         });
 
                         // Helper function to get language name
@@ -641,17 +685,6 @@
                         const savedTheme = localStorage.getItem('theme') || 'light';
                         if (savedTheme === 'dark') {
                             document.documentElement.setAttribute('data-theme', 'dark');
-                        }
-
-                        // Show current language and timezone
-                        const savedLanguage = localStorage.getItem('language');
-                        if (savedLanguage) {
-                            console.log('Language set to: ' + getLanguageName(savedLanguage));
-                        }
-
-                        const savedTimezone = localStorage.getItem('timezone');
-                        if (savedTimezone) {
-                            console.log('Timezone set to: ' + savedTimezone);
                         }
                     </script>
                 </div>

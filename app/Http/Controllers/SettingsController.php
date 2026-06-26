@@ -119,7 +119,22 @@ class SettingsController extends Controller
         session(['timezone' => $validated['timezone']]);
         date_default_timezone_set($validated['timezone']);
 
-        return back()->with('success', '✅ Preferences saved! Theme, language (' . strtoupper($validated['language']) . '), and timezone (' . $validated['timezone'] . ') updated.');
+        $message = '✅ Preferences saved! Theme: ' . $validated['theme'] .
+                   ', Language: ' . strtoupper($validated['language']) .
+                   ', Timezone: ' . $validated['timezone'];
+
+        // Return JSON for AJAX requests
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => $message,
+                'theme' => $validated['theme'],
+                'language' => $validated['language'],
+                'timezone' => $validated['timezone']
+            ]);
+        }
+
+        return back()->with('success', $message);
     }
 
     /**
