@@ -650,6 +650,7 @@ function initGlobalAiAssistant() {
         drawer.classList.toggle('open', open);
         drawer.setAttribute('aria-hidden', String(!open));
         backdrop.hidden = !open;
+        fab.classList.toggle('hidden', open);
 
         if (open) {
             window.setTimeout(() => input.focus(), 120);

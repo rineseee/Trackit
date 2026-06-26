@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <script>
-(function() {
-    var theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.setAttribute('data-bs-theme', theme);
-})();
+    (function () {
+        var theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-bs-theme', theme);
+    })();
 </script>
 
 <head>
@@ -48,10 +48,52 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <button class="trackit-fab" id="globalAiFab" aria-label="Open AI Assistant" title="AI Assistant">
-        <i class="bi bi-sparkles" style="font-size: 20px; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;"></i>
+        <i class="bi bi-robot"></i>
     </button>
 
     @stack('scripts')
 </body>
 
 </html>
+<style>
+    .trackit-fab {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+
+        border: none;
+        background: var(--trackit-primary);
+
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+        cursor: pointer;
+        z-index: 1050;
+
+        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: 22px;
+    }
+
+    .trackit-fab:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .trackit-fab:active {
+        transform: scale(0.95);
+    }
+
+    .trackit-fab.hidden {
+        opacity: 0;
+        transform: scale(0.6);
+        pointer-events: none;
+    }
+</style>
