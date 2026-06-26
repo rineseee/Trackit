@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('issues', function (Blueprint $table) {
-            $table->unsignedInteger('issue_number')->default(1);
-            $table->unique(['project_id', 'issue_number']);
-        });
+        if (!Schema::hasColumn('issues', 'issue_number')) {
+            Schema::table('issues', function (Blueprint $table) {
+                $table->unsignedInteger('issue_number')->default(1);
+                $table->unique(['project_id', 'issue_number']);
+            });
+        }
     }
 
     /**
@@ -22,9 +24,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('issues', function (Blueprint $table) {
-            $table->dropUnique(['project_id', 'issue_number']);
-            $table->dropColumn('issue_number');
-        });
+        if (Schema::hasColumn('issues', 'issue_number')) {
+            Schema::table('issues', function (Blueprint $table) {
+                $table->dropUnique(['project_id', 'issue_number']);
+                $table->dropColumn('issue_number');
+            });
+        }
     }
 };
