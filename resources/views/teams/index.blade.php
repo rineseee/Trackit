@@ -737,16 +737,29 @@
             const newRole = select.value;
             const memberId = form.dataset.memberId;
             const memberName = form.dataset.memberName;
-            const oldRole = select.options[select.selectedIndex].defaultSelected ? select.options[select.selectedIndex].value : select.options[0].value;
 
-            // Get current selected value before change
-            const currentOption = select.querySelector(`option[value="${oldRole}"]`);
-            if (currentOption) {
-                currentOption.selected = true;
+            // Store old role before any changes
+            let oldRole = null;
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].defaultSelected) {
+                    oldRole = select.options[i].value;
+                    break;
+                }
             }
 
+            // If we couldn't find old role, keep current
+            if (!oldRole) {
+                for (let i = 0; i < select.options.length; i++) {
+                    if (select.options[i].selected && select.options[i].value !== newRole) {
+                        oldRole = select.options[i].value;
+                        break;
+                    }
+                }
+            }
+
+            if (!oldRole) oldRole = newRole;
+
             // Show loading state
-            const originalText = select.innerHTML;
             select.disabled = true;
             select.style.opacity = '0.6';
 
@@ -761,7 +774,13 @@
                     'Accept': 'application/json'
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                // Check if response is OK
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     // Update the select value
@@ -784,8 +803,8 @@
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                showRoleChangeError('Error updating role. Please try again.');
+                console.error('Fetch error:', error);
+                showRoleChangeError('Network error updating role. Please refresh and try again.');
                 select.value = oldRole;
                 select.disabled = false;
                 select.style.opacity = '1';
