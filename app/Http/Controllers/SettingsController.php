@@ -114,27 +114,41 @@ class SettingsController extends Controller
     }
 
     /**
-     * Update notification settings
+     * Update notification settings with form request validation
      */
-    public function updateNotifications(Request $request)
+    public function updateNotifications(\App\Http\Requests\UpdateNotificationsRequest $request)
     {
-        $validated = $request->validate([
-            'notifications_email' => 'boolean',
-            'notifications_push' => 'boolean',
-            'notifications_sms' => 'boolean',
-            'notifications_issues' => 'boolean',
-            'notifications_comments' => 'boolean',
-            'notifications_mentions' => 'boolean',
-        ]);
+        // Get all form inputs
+        $input = $request->all();
+
+        // Convert checkboxes: checked = true, unchecked = missing from request
+        $notifications = [
+            'notifications_email' => isset($input['notifications_email']),
+            'notifications_push' => isset($input['notifications_push']),
+            'notifications_sms' => isset($input['notifications_sms']),
+            'notifications_issues' => isset($input['notifications_issues']),
+            'notifications_comments' => isset($input['notifications_comments']),
+            'notifications_mentions' => isset($input['notifications_mentions']),
+        ];
 
         $preferences = auth()->user()->preferences ?? [];
-        $preferences = array_merge($preferences, $validated);
+        $preferences = array_merge($preferences, $notifications);
 
         auth()->user()->update([
             'preferences' => $preferences,
         ]);
 
-        return back()->with('success', 'Notification settings updated!');
+        // Prepare notification summary
+        $enabled = [];
+        if ($notifications['notifications_email']) $enabled[] = 'Email';
+        if ($notifications['notifications_push']) $enabled[] = 'Push';
+        if ($notifications['notifications_sms']) $enabled[] = 'SMS';
+
+        $summary = !empty($enabled)
+            ? '✅ Notifications enabled: ' . implode(', ', $enabled)
+            : '✅ All notifications disabled';
+
+        return back()->with('success', $summary);
     }
 
     /**

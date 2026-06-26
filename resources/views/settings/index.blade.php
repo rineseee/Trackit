@@ -631,12 +631,26 @@
                         <p>Choose what to receive</p>
                     </div>
 
-                    <form action="{{ route('settings.updateNotifications') }}" method="POST" class="form-grid">
+                    @if (session('success'))
+                        <div class="success-message" style="margin-bottom: 12px; padding: 10px 12px; background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 4px; color: #166534;">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="error-message" style="margin-bottom: 12px;">
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    <form action="{{ route('settings.updateNotifications') }}" method="POST" class="form-grid" id="notificationsForm">
                         @csrf
                         @method('PUT')
 
                         <label class="notification-item">
-                            <input type="checkbox" name="notifications_email" class="notification-checkbox" {{ $notifications_email ? 'checked' : '' }}>
+                            <input type="checkbox" name="notifications_email" value="1" class="notification-checkbox" id="notifEmail" {{ $notifications_email ? 'checked' : '' }}>
                             <span class="notification-content">
                                 <span class="notification-title">Email</span>
                                 <span class="notification-desc">Receive via email</span>
@@ -644,7 +658,7 @@
                         </label>
 
                         <label class="notification-item">
-                            <input type="checkbox" name="notifications_push" class="notification-checkbox" {{ $notifications_push ? 'checked' : '' }}>
+                            <input type="checkbox" name="notifications_push" value="1" class="notification-checkbox" id="notifPush" {{ $notifications_push ? 'checked' : '' }}>
                             <span class="notification-content">
                                 <span class="notification-title">Push</span>
                                 <span class="notification-desc">Browser notifications</span>
@@ -652,20 +666,39 @@
                         </label>
 
                         <label class="notification-item">
-                            <input type="checkbox" name="notifications_sms" class="notification-checkbox" {{ $notifications_sms ? 'checked' : '' }}>
+                            <input type="checkbox" name="notifications_sms" value="1" class="notification-checkbox" id="notifSMS" {{ $notifications_sms ? 'checked' : '' }}>
                             <span class="notification-content">
                                 <span class="notification-title">SMS</span>
                                 <span class="notification-desc">Text alerts</span>
                             </span>
                         </label>
 
-                        <div class="form-actions">
-                            <button type="submit" class="btn-primary">
+                        <div class="form-actions" style="grid-column: 1 / -1;">
+                            <button type="submit" class="btn-primary" id="notifSaveBtn">
                                 <i class="bi bi-check2"></i>
-                                Save
+                                Save Notifications
                             </button>
                         </div>
                     </form>
+
+                    <script>
+                        document.getElementById('notificationsForm').addEventListener('submit', function(e) {
+                            const btn = document.getElementById('notifSaveBtn');
+                            btn.disabled = true;
+                            btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Saving...';
+                        });
+
+                        // Add visual feedback when checkboxes change
+                        const checkboxes = document.querySelectorAll('.notification-checkbox');
+                        checkboxes.forEach(checkbox => {
+                            checkbox.addEventListener('change', function() {
+                                this.parentElement.style.opacity = '0.7';
+                                setTimeout(() => {
+                                    this.parentElement.style.opacity = '1';
+                                }, 200);
+                            });
+                        });
+                    </script>
                 </div>
             </div>
 
