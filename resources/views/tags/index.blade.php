@@ -499,17 +499,12 @@
         <div class="tags-header">
             <h1>Tags</h1>
             <div class="tags-header-actions">
-                @auth
-                    <button class="ui-button primary" onclick="document.getElementById('scrollToForm').scrollIntoView({behavior: 'smooth'})">
-                        <i class="bi bi-plus-lg"></i>
-                        New Tag
-                    </button>
-                @else
+                @guest
                     <a href="{{ route('login') }}" class="ui-button primary">
                         <i class="bi bi-box-arrow-in-right"></i>
                         Log In
                     </a>
-                @endauth
+                @endguest
             </div>
         </div>
 
