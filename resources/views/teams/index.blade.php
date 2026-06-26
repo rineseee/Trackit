@@ -769,6 +769,17 @@
             console.log('Submitting role change for member', memberId, 'to role', newRole);
             console.log('Form action:', form.action);
 
+            // Create form data with all fields
+            const formData = new FormData();
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+            formData.append('_method', 'PUT');
+            formData.append('role', newRole);
+
+            console.log('FormData contents:');
+            for (let [key, value] of formData.entries()) {
+                console.log(key, ':', value);
+            }
+
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
