@@ -98,7 +98,6 @@
                         </option>
                     @endforeach
                 </select>
-                <span class="form-help">Ctrl/Cmd + Click to select multiple</span>
             </div>
         </div>
 
