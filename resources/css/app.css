@@ -523,16 +523,20 @@
        AI ASSISTANT DRAWER
        ============================================================================ */
 
-    .trackit-ai-backdrop {
-        position: fixed;
-        inset: 0;
-        background: rgba(15, 23, 42, 0.3);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 220ms ease;
-    }
+   .trackit-ai-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 999;
 
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 180ms ease, visibility 180ms ease;
+}
     .trackit-ai-backdrop:not([hidden]) {
         display: block;
     }
@@ -1965,7 +1969,7 @@
     .ui-button.primary {
         background: var(--trackit-primary);
         border-color: var(--trackit-primary);
-        color: #000000;
+        color: #ffffff;
     }
 
     .ui-button.primary:hover {
@@ -1977,15 +1981,15 @@
     }
 
     .ui-button.secondary {
-        background: #f3f4f6;
-        border-color: #d1d5db;
-        color: #000000;
+        background: #000000;
+        border-color: #000000;
+        color: #ffffff;
     }
 
     .ui-button.secondary:hover {
-        background: #e5e7eb;
-        border-color: #9ca3af;
-        color: #000000;
+        background: #1f2937;
+        border-color: #1f2937;
+        color: #ffffff;
         transform: translateY(-2px);
         box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
     }
@@ -3619,10 +3623,15 @@ html[data-theme='dark'] .form-field label {
     color: var(--trackit-text);
 }
 
+html[data-theme='dark'] .ui-button.primary,
+html[data-theme='dark'] .ui-button.secondary {
+    color: #ffffff;
+}
+
 html[data-theme='dark'] .ui-button.secondary:hover {
     background: #374151;
     border-color: #4b5563;
-    color: var(--trackit-text);
+    color: #ffffff;
 }
 
 html[data-theme='dark'] h1,
